@@ -6,11 +6,6 @@ Lower the allowed Spline Error
 Values are not clipped or scaled in subsystems, MUST be done in each teleop and both Robots
 
         TODOS:
-ControllerConstants - tune deadband
-ControllerConstants - tune wait time
-
-HandConstants - tune Grabber ranges
-
 ArmConstants - tune PlaneLauncher range
 ArmConstants - tune shoulder max power
 ArmConstants - tune climb max power
@@ -22,9 +17,13 @@ ArmConstants - tune wrist p
 ArmConstants - tune wrist fourbar positions
 ArmConstants - tune fourbar switching angle
 
-AprilTagVisionConstants - tune camera offsets
+ControllerConstants - tune deadband
+ControllerConstants - tune wait time
+
+HandConstants - tune all Grabber ranges
+
+VisionConstants - tune camera offsets
+VisionConstants - tune detection threshold
 
 Drivetrain - Write it
 DrivetrainConstants - Write it
-TensorFlowVision - make it output Left, Right, or Center
-TensorFlowVisionConstants - write it
