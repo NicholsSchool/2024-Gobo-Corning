@@ -5,7 +5,7 @@ Wrist may need to use FeedbackController, test that
 Lower the allowed Spline Error
 Values are not clipped or scaled in subsystems, MUST be done in each teleop and both Robots, and spline...
 Check loop times of each optimized teleop
-Optimize the averageAngles m
+Optimize the averageAngles method
 
         TODOS:
 ArmConstants - tune PlaneLauncher range
