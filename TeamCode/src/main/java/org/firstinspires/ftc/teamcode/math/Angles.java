@@ -48,5 +48,4 @@ public class Angles {
     public static double average(double angle1, double angle2) {
         return Math.atan2(Math.sin(angle1) + Math.sin(angle2), Math.cos(angle1) + Math.cos(angle2));
     }
-
 }

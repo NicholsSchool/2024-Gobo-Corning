@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.controllers;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.teamcode.math.Point;
+
 /**
  * A Controller
  */
@@ -85,5 +87,14 @@ public class Controller {
         rightStickY.update(-gamepad.right_stick_y);
         leftTrigger.update(gamepad.left_trigger);
         rightTrigger.update(gamepad.right_trigger);
+    }
+
+    /**
+     * The Point value of the left joystick
+     *
+     * @return the joystick value
+     */
+    public Point leftJoystick() {
+        return new Point(leftStickX.value(), leftStickY.value());
     }
 }
