@@ -64,7 +64,8 @@ public class AprilTagVision implements VisionConstants {
         if(usefulDetections == 0)
             return null;
 
-        return new RobotPose(poseSum[0] / sumOfWeights, poseSum[1] / sumOfWeights, Math.atan2(poseSum[3],poseSum[2]));
+        return new RobotPose(poseSum[0] / sumOfWeights, poseSum[1] / sumOfWeights,
+                Math.atan2(poseSum[3],poseSum[2]));
     }
 
     private double[] localize(AprilTagDetection aprilTagDetection) {

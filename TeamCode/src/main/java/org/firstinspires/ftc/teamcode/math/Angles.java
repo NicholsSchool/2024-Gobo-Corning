@@ -36,4 +36,17 @@ public class Angles {
             angle += TAO;
         return angle;
     }
+
+    /**
+     * Averages two angles in radians
+     *
+     * @param angle1 the first angle
+     * @param angle2 the second angle
+     *
+     * @return the average in radians, accounting for angle ranges
+     */
+    public static double average(double angle1, double angle2) {
+        return Math.atan2(Math.sin(angle1) + Math.sin(angle2), Math.cos(angle1) + Math.cos(angle2));
+    }
+
 }

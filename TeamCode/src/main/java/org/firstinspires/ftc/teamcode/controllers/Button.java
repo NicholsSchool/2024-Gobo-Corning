@@ -7,8 +7,7 @@ import androidx.annotation.NonNull;
  */
 public class Button {
     private boolean isPressed;
-    private boolean wasJustPressed;
-    private boolean toggleState;
+    private boolean wasPressed;
 
     /**
      * Instantiates the Button
@@ -30,16 +29,7 @@ public class Button {
      * @return whether the button was just pressed
      */
     public boolean isWasJustPressed() {
-        return wasJustPressed;
-    }
-
-    /**
-     * The button's toggle state
-     *
-     * @return whether the toggle is true
-     */
-    public boolean toggleState() {
-        return toggleState;
+        return isPressed && !wasPressed;
     }
 
     /**
@@ -58,8 +48,7 @@ public class Button {
      * @param isNowPressed the new state
      */
     public void update(boolean isNowPressed) {
-        wasJustPressed = isNowPressed && !isPressed;
-        toggleState = wasJustPressed != toggleState;
+        wasPressed = isPressed;
         isPressed = isNowPressed;
     }
 }

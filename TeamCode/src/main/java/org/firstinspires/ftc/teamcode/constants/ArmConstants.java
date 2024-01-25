@@ -19,7 +19,7 @@ public interface ArmConstants {
     /** Shoulder Proportional Constant */
     double SHOULDER_P = 0.001;
 
-    /** Shoulder Vertical Proportional Constant */
+    /** Shoulder Vertical Constant */
     double VERTICAL_P = 0.05;
 
     /** Arm Vertical Encoder Position */
@@ -29,7 +29,7 @@ public interface ArmConstants {
     double WRIST_MAX = 0.2;
 
     /** Wrist Proportional Constant */
-    double WRIST_P = 0.001;
+    double WRIST_P = 0.0005;
 
     /** Wrist intaking virtual fourbar position */
     double WRIST_INTAKING = 110.0;

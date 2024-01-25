@@ -3,14 +3,16 @@ Add Spline Math Class
 Use all utility classes in every possible spot
 Wrist may need to use FeedbackController, test that
 Lower the allowed Spline Error
-Values are not clipped or scaled in subsystems, MUST be done in each teleop and both Robots
+Values are not clipped or scaled in subsystems, MUST be done in each teleop and both Robots, and spline...
+Check loop times of each optimized teleop
+Optimize the averageAngles m
 
         TODOS:
 ArmConstants - tune PlaneLauncher range
 ArmConstants - tune shoulder max power
 ArmConstants - tune climb max power
 ArmConstants - tune shoulder p
-ArmConstants - tune shoulder f
+ArmConstants - tune shoulder vertical p
 ArmConstants - tune arm vertical position
 ArmConstants - tune wrist max power
 ArmConstants - tune wrist p
