@@ -58,7 +58,7 @@ public class Controller {
     }
 
     /**
-     * Updates all Buttons and Axes
+     * Updates all Buttons, Axes, and Joysticks
      */
     public void update() {
         leftBumper.update(gamepad.left_bumper);

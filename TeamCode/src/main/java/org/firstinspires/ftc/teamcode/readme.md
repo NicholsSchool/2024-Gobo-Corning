@@ -1,12 +1,12 @@
         REPOSITORY NOTES
 DEBUG, CHECK, OPTIMIZE EVERYTHING (ESPECIALLY DRIVETRAIN AND ARM)
 Add 2 Spline Math Classes
+Add Spline Constants
+Significantly Lower the allowed Spline Error
 Use all utility classes in every possible spot
 Check loop times of each optimized teleop
 Figure out a way to optimize Angles.averageAngles()
 Add Feedback Controlled Climbing Method to the Arm
-Add Spline Constants
-Significantly Lower the allowed Spline Error
 
         TODOS:
 ArmConstants - tune PlaneLauncher range
@@ -28,4 +28,9 @@ HandConstants - tune all Grabber ranges
 VisionConstants - tune camera offsets
 VisionConstants - tune detection threshold
 
-DrivetrainConstants - Write it
+DrivetrainConstants - Tune Profile Speeds
+DrivetrainConstants - Tune Turning Max
+DrivetrainConstants - Tune Low and High Gear max
+DrivetrainConstants - Tune auto align p
+DrivetrainConstants - Tune auto align error
+DrivetrainConstants - Tune both odometry corrections
