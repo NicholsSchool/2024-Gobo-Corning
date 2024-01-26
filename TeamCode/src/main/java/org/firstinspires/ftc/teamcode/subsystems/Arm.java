@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.subsystems;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.constants.ArmConstants;
 import org.firstinspires.ftc.teamcode.math.FeedbackController;
@@ -18,6 +19,7 @@ public class Arm implements ArmConstants {
     private final Servo planeLauncher;
     private final FeedbackController armController;
     private final SimpleFeedbackController wristController;
+    private double wristTargetPosition;
     private int armOffset;
     private int wristOffset;
     private boolean launcherPosition;
@@ -48,8 +50,8 @@ public class Arm implements ArmConstants {
         planeLauncher.setDirection(Servo.Direction.FORWARD);
         planeLauncher.scaleRange(ArmConstants.PLANE_MIN, ArmConstants.PLANE_MAX);
 
-        armController = new FeedbackController(SHOULDER_P, 0.0, -SHOULDER_MAX, SHOULDER_MAX, VERTICAL_P, ARM_VERTICAL);
-        wristController = new SimpleFeedbackController(WRIST_P, 0.0, -WRIST_MAX, WRIST_MAX);
+        armController = new FeedbackController(SHOULDER_P, 0.0, VERTICAL_P, ARM_VERTICAL);
+        wristController = new SimpleFeedbackController(WRIST_P);
     }
 
     /**
@@ -66,6 +68,7 @@ public class Arm implements ArmConstants {
      * @param power the input motor power
      */
     public void armManual(double power) {
+        power = Range.clip(power, -SHOULDER_MAX, SHOULDER_MAX);
         leftShoulder.setPower(power);
         rightShoulder.setPower(power);
     }
@@ -101,7 +104,7 @@ public class Arm implements ArmConstants {
      * @param power the input motor power
      */
     public void wristManual(double power) {
-        wrist.setPower(power);
+        wrist.setPower(Range.clip(power, -WRIST_MAX, WRIST_MAX));
     }
 
     /**
@@ -117,16 +120,16 @@ public class Arm implements ArmConstants {
      * Moves the wrist to the target position using a feedback loop
      */
     public void wristToPosition() {
-        wristManual(wristController.calculate(getWristPosition()));
+        wristManual(wristController.calculate(wristTargetPosition - getWristPosition()));
     }
 
     /**
      * Sets the wrist target position
      *
-     * @param targetPosition the thru bore encoder position
+     * @param targetPosition the target thru bore encoder position
      */
     public void setTargetWristPosition(double targetPosition) {
-        wristController.setTargetPosition(targetPosition);
+        wristTargetPosition = targetPosition;
     }
 
     /**
@@ -142,11 +145,17 @@ public class Arm implements ArmConstants {
     }
 
     /**
-     * Sets the arm and wrist to Float mode
+     * Sets the arm to Float mode
      */
-    public void setFloat() {
+    public void setArmFloat() {
         leftShoulder.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
         rightShoulder.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
+    }
+
+    /**
+     * Sets the wrist to Float mode
+     */
+    public void setWristFloat() {
         wrist.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
     }
 

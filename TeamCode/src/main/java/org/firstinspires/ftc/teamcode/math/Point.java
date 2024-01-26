@@ -31,4 +31,21 @@ public class Point {
     public double distance(Point otherPoint) {
         return Math.hypot(x - otherPoint.x, y - otherPoint.y);
     }
+
+    /**
+     * Restricts the Point's magnitude
+     *
+     * @param maxMagnitude the maximum Point magnitude
+     *
+     * @return the Point with the value restriction,
+     *         without altering the implicit values
+     */
+    public Point restrictMagnitude(double maxMagnitude) {
+        double magnitude = Math.hypot(x, y);
+        if(magnitude > maxMagnitude) {
+            double ratio = maxMagnitude / magnitude;
+            return new Point(x * ratio, y * ratio);
+        }
+        return this;
+    }
 }

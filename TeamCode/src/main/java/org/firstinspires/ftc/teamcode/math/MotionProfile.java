@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.math;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
 
 /**
  * Restricts the rate of change of a value
@@ -8,16 +9,19 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class MotionProfile {
     private final ElapsedTime timer;
     private final double speed;
+    private final double maxMagnitude;
     private double value;
 
     /**
      * Instantiates the Motion Profile
      *
      * @param speed the maximum speed
+     * @param maxMagnitude the maximum output value magnitude
      */
-    public MotionProfile(double speed) {
+    public MotionProfile(double speed, double maxMagnitude) {
         timer = new ElapsedTime();
         this.speed = speed;
+        this.maxMagnitude = maxMagnitude;
     }
 
     /**
@@ -28,6 +32,8 @@ public class MotionProfile {
      * @return the restricted output value
      */
     public double calculate(double inputValue) {
+        inputValue = Range.clip(inputValue, -maxMagnitude, maxMagnitude);
+
         double timePassed = timer.time();
         timer.reset();
 

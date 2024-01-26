@@ -3,9 +3,9 @@ package org.firstinspires.ftc.teamcode.math;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
- * Restricts the rate of change of a Point on a Cartesian Plane
+ * Restricts the rate of change of a Point on an (x, y) plane
  */
-public class CartesianMotionProfile {
+public class PointMotionProfile {
     private final ElapsedTime timer;
     private final Point point;
     private final double speed;
@@ -15,7 +15,7 @@ public class CartesianMotionProfile {
      *
      * @param speed the maximum speed
      */
-    public CartesianMotionProfile(double speed) {
+    public PointMotionProfile(double speed) {
         timer = new ElapsedTime();
         point = new Point(0.0, 0.0);
         this.speed = speed;

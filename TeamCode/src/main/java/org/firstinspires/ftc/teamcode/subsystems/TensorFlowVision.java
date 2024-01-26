@@ -43,7 +43,7 @@ public class TensorFlowVision implements VisionConstants {
     }
 
     /**
-     * Gets the Best Prop Recognition
+     * Gets the Prop Location using the best Prop Recognition
      *
      * @return the Enum representing the Prop Location
      */

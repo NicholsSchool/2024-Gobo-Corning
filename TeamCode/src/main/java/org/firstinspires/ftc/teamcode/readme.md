@@ -1,11 +1,12 @@
         REPOSITORY NOTES
-Add Spline Math Class
+DEBUG, CHECK, OPTIMIZE EVERYTHING (ESPECIALLY DRIVETRAIN AND ARM)
+Add 2 Spline Math Classes
 Use all utility classes in every possible spot
-Wrist may need to use FeedbackController, test that
-Lower the allowed Spline Error
-Values are not clipped or scaled in subsystems, MUST be done in each teleop and both Robots, and spline...
 Check loop times of each optimized teleop
-Optimize the averageAngles method
+Figure out a way to optimize Angles.averageAngles()
+Add Feedback Controlled Climbing Method to the Arm
+Add Spline Constants
+Significantly Lower the allowed Spline Error
 
         TODOS:
 ArmConstants - tune PlaneLauncher range
@@ -27,5 +28,4 @@ HandConstants - tune all Grabber ranges
 VisionConstants - tune camera offsets
 VisionConstants - tune detection threshold
 
-Drivetrain - Write it
 DrivetrainConstants - Write it

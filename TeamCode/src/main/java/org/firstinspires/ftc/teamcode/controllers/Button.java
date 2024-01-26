@@ -28,7 +28,7 @@ public class Button {
      *
      * @return whether the button was just pressed
      */
-    public boolean isWasJustPressed() {
+    public boolean wasJustPressed() {
         return isPressed && !wasPressed;
     }
 

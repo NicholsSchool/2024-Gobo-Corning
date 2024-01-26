@@ -10,6 +10,21 @@ public interface DrivetrainConstants {
     /** The Maximum Speed of the Turning Profile */
     double TURN_PROFILE_SPEED = 1.0;
 
+    /** The Maximum Output Value Magnitude of the Turning Profile */
+    double TURN_PROFILE_MAX = 0.25;
+
+    /** Virtual Low Gear Max Speed */
+    double VIRTUAL_LOW_GEAR = 0.375;
+
+    /** Virtual High Gear Max Speed */
+    double VIRTUAL_HIGH_GEAR = 0.75;
+
+    /** Auto Align Proportional Constant */
+    double AUTO_ALIGN_P = 0.275;
+
+    /** Auto Align allowed error in radians */
+    double AUTO_ALIGN_ERROR = 0.00872664625;
+
     /** Left Drive Wheel Angle Offset (30 degrees) */
     double LEFT_DRIVE_OFFSET = Math.PI / 6.0;
 
@@ -18,4 +33,19 @@ public interface DrivetrainConstants {
 
     /** Back Drive Wheel Angle Offset (270 degrees) */
     double BACK_DRIVE_OFFSET = 1.5 * Math.PI;
+
+    /** Thru Bore Encoder ticks per revolution */
+    int THRU_BORE_TICKS_PER_REV = 8192;
+
+    /** Dead wheel diameter in inches */
+    double DEAD_WHEEL_DIAMETER = 2.5;
+
+    /** Inches per tick of a dead wheel */
+    double INCHES_PER_TICK = DEAD_WHEEL_DIAMETER * Math.PI / THRU_BORE_TICKS_PER_REV;
+
+    /** Horizontal Correction coefficient */
+    double STRAFE_ODOMETRY_CORRECTION = 1.0;
+
+    /** Forward Correction coefficient */
+    double FORWARD_ODOMETRY_CORRECTION = 1.0;
 }

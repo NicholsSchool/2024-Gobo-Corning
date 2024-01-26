@@ -7,8 +7,6 @@ import com.qualcomm.robotcore.util.Range;
  */
 public class FeedbackController {
     private final double proportional;
-    private final double minimum;
-    private final double maximum;
     private final double verticalProportional;
     private final double verticalPosition;
     private double targetPosition;
@@ -18,16 +16,12 @@ public class FeedbackController {
      *
      * @param p the proportional constant
      * @param target the initial target position
-     * @param min the minimum output value
-     * @param max the maximum output value
      * @param verticalP the proportional based on vertical error
      * @param verticalPos the vertical position
      */
-    public FeedbackController(double p, double target, double min, double max, double verticalP, double verticalPos) {
+    public FeedbackController(double p, double target, double verticalP, double verticalPos) {
         proportional = p;
         targetPosition = target;
-        minimum = min;
-        maximum = max;
         verticalProportional = verticalP;
         verticalPosition = verticalPos;
     }
@@ -49,7 +43,7 @@ public class FeedbackController {
      * @return the output value
      */
     public double calculate(double position) {
-        return Range.clip(proportional * (targetPosition - position) +
-                verticalProportional * Math.cos(Math.PI * position / verticalPosition), minimum, maximum);
+        return proportional * (targetPosition - position) +
+                verticalProportional * Math.cos(Math.PI * position / verticalPosition);
     }
 }

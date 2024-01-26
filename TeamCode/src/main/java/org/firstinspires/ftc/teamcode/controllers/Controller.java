@@ -2,34 +2,30 @@ package org.firstinspires.ftc.teamcode.controllers;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-import org.firstinspires.ftc.teamcode.math.Point;
-
 /**
  * A Controller
  */
 public class Controller {
     private final Gamepad gamepad;
-    public Button leftBumper;
-    public Button rightBumper;
-    public Button dpadUp;
-    public Button dpadDown;
-    public Button dpadLeft;
-    public Button dpadRight;
-    public Button x;
-    public Button circle;
-    public Button square;
-    public Button triangle;
-    public Button share;
-    public Button options;
-    public Button leftStick;
-    public Button rightStick;
+    public final Button leftBumper;
+    public final Button rightBumper;
+    public final Button dpadUp;
+    public final Button dpadDown;
+    public final Button dpadLeft;
+    public final Button dpadRight;
+    public final Button x;
+    public final Button circle;
+    public final Button square;
+    public final Button triangle;
+    public final Button share;
+    public final Button options;
+    public final Button leftStickButton;
+    public final Button rightStickButton;
 
-    public Axis leftTrigger;
-    public Axis rightTrigger;
-    public Axis leftStickX;
-    public Axis leftStickY;
-    public Axis rightStickX;
-    public Axis rightStickY;
+    public final Axis leftTrigger;
+    public final Axis rightTrigger;
+    public final Joystick leftStick;
+    public final Joystick rightStick;
 
     /**
      * Instantiates the Controller
@@ -51,15 +47,14 @@ public class Controller {
         triangle = new Button();
         share = new Button();
         options = new Button();
-        leftStick = new Button();
-        rightStick = new Button();
+        leftStickButton = new Button();
+        rightStickButton = new Button();
 
         leftTrigger = new Axis();
         rightTrigger = new Axis();
-        leftStickX = new Axis();
-        leftStickY = new Axis();
-        rightStickX = new Axis();
-        rightStickY = new Axis();
+
+        leftStick = new Joystick();
+        rightStick = new Joystick();
     }
 
     /**
@@ -78,23 +73,13 @@ public class Controller {
         triangle.update(gamepad.y);
         share.update(gamepad.back);
         options.update(gamepad.start);
-        leftStick.update(gamepad.left_stick_button);
-        rightStick.update(gamepad.right_stick_button);
+        leftStickButton.update(gamepad.left_stick_button);
+        rightStickButton.update(gamepad.right_stick_button);
 
-        leftStickX.update(gamepad.left_stick_x);
-        leftStickY.update(-gamepad.left_stick_y);
-        rightStickX.update(gamepad.right_stick_x);
-        rightStickY.update(-gamepad.right_stick_y);
         leftTrigger.update(gamepad.left_trigger);
         rightTrigger.update(gamepad.right_trigger);
-    }
 
-    /**
-     * The Point value of the left joystick
-     *
-     * @return the joystick value
-     */
-    public Point leftJoystick() {
-        return new Point(leftStickX.value(), leftStickY.value());
+        leftStick.update(gamepad.left_stick_x, -gamepad.left_stick_y);
+        rightStick.update(gamepad.right_stick_x, -gamepad.right_stick_y);
     }
 }
