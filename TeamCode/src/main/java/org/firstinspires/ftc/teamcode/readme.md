@@ -6,6 +6,7 @@ Use all utility classes in every possible spot
 
         CODE CHANGES TODO:
 Remove all alliance checking in loop methods
+Magnitude scaling if current magnitude is 0???
 Figure out a way to optimize Angles.averageAngles()
 Check loop times of each optimized teleop
 
@@ -36,7 +37,7 @@ DrivetrainConstants - Tune both odometry corrections
 
 HandConstants - tune all Grabber ranges
 
-ParabolicSplineConstants - ........................WRITE IT.........................................
+ParabolicSplineConstants - Tune ALL Waypoints
 
 VisionConstants - tune camera offsets
 VisionConstants - tune detection threshold

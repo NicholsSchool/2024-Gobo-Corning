@@ -22,6 +22,9 @@ public interface ParabolicSplineConstants {
     /** Spline Scoring Coordinate X Value */
     double SCORING_X = -46.0;
 
+    /** The X value for launching the plane */
+    double PLANE_LAUNCHING_X = -24.0;
+
     /** Spline Intake Coordinate Blue Y Value */
     double BLUE_INTAKE_Y = 56.0;
 
@@ -35,7 +38,7 @@ public interface ParabolicSplineConstants {
     double RED_WAYPOINT_Y = 36.0;
 
     /** Spline Waypoint Coordinate Y Value when going to scoring */
-    double WAYPOINT_Y_TO_SCORING = 0.0;
+    double CENTER_WAYPOINT_Y = 0.0;
 
     /** The Closest to Driver Scoring Y For Blue Alliance */
     double BLUE_SCORING_Y_CLOSE = -42.0;

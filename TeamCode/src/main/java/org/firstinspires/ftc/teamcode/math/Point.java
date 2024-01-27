@@ -51,18 +51,34 @@ public class Point {
     }
 
     /**
-     * Restricts the Point's magnitude
+     * Restricts the magnitude of the Point.
      *
      * @param maxMagnitude the maximum Point magnitude
      *
-     * @return the new Point with the value restriction
+     * @return this Point after the value restriction
      */
     public Point restrictMagnitude(double maxMagnitude) {
         double magnitude = magnitude();
         if(magnitude > maxMagnitude) {
             double ratio = maxMagnitude / magnitude;
-            return new Point(x * ratio, y * ratio);
+            x *= ratio;
+            y *= ratio;
         }
         return this;
+    }
+
+    /**
+     * Scales this Point's magnitude, unless this Point's
+     * magnitude is 0
+     *
+     * @param newMagnitude the new magnitude
+     */
+    public void scaleMagnitude(double newMagnitude) {
+        double magnitude = magnitude();
+        if(magnitude != 0) {
+            double ratio = newMagnitude / magnitude;
+            x *= ratio;
+            y *= ratio;
+        }
     }
 }
