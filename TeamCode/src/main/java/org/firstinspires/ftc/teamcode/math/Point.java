@@ -33,15 +33,32 @@ public class Point {
     }
 
     /**
+     * The absolute value of the Point
+     *
+     * @return the distance from (0, 0)
+     */
+    public double magnitude() {
+        return Math.hypot(x, y);
+    }
+
+    /**
+     * The angle of the Point
+     *
+     * @return the angle from (0, 0) in radians
+     */
+    public double angle() {
+        return Math.atan2(y, x);
+    }
+
+    /**
      * Restricts the Point's magnitude
      *
      * @param maxMagnitude the maximum Point magnitude
      *
-     * @return the Point with the value restriction,
-     *         without altering the implicit values
+     * @return the new Point with the value restriction
      */
     public Point restrictMagnitude(double maxMagnitude) {
-        double magnitude = Math.hypot(x, y);
+        double magnitude = magnitude();
         if(magnitude > maxMagnitude) {
             double ratio = maxMagnitude / magnitude;
             return new Point(x * ratio, y * ratio);

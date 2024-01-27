@@ -25,7 +25,7 @@ public class Joystick {
      *
      * @return the position as a Point
      */
-    public Point position() {
+    public Point toPoint() {
         return new Point(x.value(), y.value());
     }
 

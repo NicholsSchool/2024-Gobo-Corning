@@ -17,7 +17,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
  * Robot Drivetrain
  */
 public class Drivetrain implements DrivetrainConstants {
-    private final boolean isBlueAlliance;
     private final DcMotorEx leftDrive, rightDrive, backDrive, frontOdometry, leftOdometry, rightOdometry;
     private final AHRS navx;
     private final PointMotionProfile driveProfile;
@@ -31,13 +30,11 @@ public class Drivetrain implements DrivetrainConstants {
      * Initializes the Drivetrain subsystem
      *
      * @param hwMap the hardwareMap
-     * @param isBlueAlliance whether we are blue alliance
      * @param x the initial x coordinate
      * @param y the initial y coordinate
      * @param initialHeading the initial robot heading in radians
      */
     public Drivetrain(HardwareMap hwMap, boolean isBlueAlliance, double x, double y, double initialHeading) {
-        this.isBlueAlliance = isBlueAlliance;
         this.previousHeading = initialHeading;
         this.imuOffset = initialHeading;
         this.targetHeading = initialHeading;
@@ -78,6 +75,10 @@ public class Drivetrain implements DrivetrainConstants {
         rightOdometry.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         frontOdometry.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
 
+        leftDrive.setVelocityPIDFCoefficients(0.0, 0.0, 0.0, LEFT_DRIVE_FF);
+        rightDrive.setVelocityPIDFCoefficients(0.0, 0.0, 0.0, RIGHT_DRIVE_FF);
+        backDrive.setVelocityPIDFCoefficients(0.0, 0.0, 0.0, BACK_DRIVE_FF);
+
         navx = AHRS.getInstance(hwMap.get(NavxMicroNavigationSensor.class,
                 "navx"), AHRS.DeviceDataType.kProcessedData);
 
@@ -99,8 +100,8 @@ public class Drivetrain implements DrivetrainConstants {
 
         driveInput = driveProfile.calculate(
                 driveInput.restrictMagnitude(lowGear ? VIRTUAL_LOW_GEAR : VIRTUAL_HIGH_GEAR));
-        double power = Math.hypot(driveInput.y, driveInput.x);
-        double angle = Math.atan2(driveInput.y, driveInput.x);
+        double power = driveInput.magnitude();
+        double angle = driveInput.angle();
 
         leftDrive.setPower(turn + power * Math.cos(Math.toRadians(angle + LEFT_DRIVE_OFFSET - pose.angle)));
         rightDrive.setPower(turn + power * Math.cos(Math.toRadians(angle + RIGHT_DRIVE_OFFSET - pose.angle)));

@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.math;
 
-import com.qualcomm.robotcore.util.Range;
-
 /**
  * A Feedback Controller
  */
@@ -44,6 +42,6 @@ public class FeedbackController {
      */
     public double calculate(double position) {
         return proportional * (targetPosition - position) +
-                verticalProportional * Math.cos(Math.PI * position / verticalPosition);
+                verticalProportional * Math.cos(Math.PI * position / (2.0 * verticalPosition));
     }
 }

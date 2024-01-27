@@ -43,7 +43,7 @@ public class TensorFlowVision implements VisionConstants {
     }
 
     /**
-     * Gets the Prop Location using the best Prop Recognition
+     * Gets the Prop Location using the best current Prop Recognition
      *
      * @return the Enum representing the Prop Location
      */
@@ -62,9 +62,9 @@ public class TensorFlowVision implements VisionConstants {
 
         if(bestRecognition == null)
             return PropLocation.LEFT;
-        if((bestRecognition.getLeft() + bestRecognition.getRight()) * 0.5 < PROP_THRESHOLD)
-            return PropLocation.CENTER;
-        return PropLocation.RIGHT;
+
+        return (bestRecognition.getLeft() + bestRecognition.getRight()) * 0.5 < PROP_THRESHOLD ?
+            PropLocation.CENTER : PropLocation.RIGHT;
     }
 
     /**

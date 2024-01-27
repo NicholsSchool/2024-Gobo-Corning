@@ -41,8 +41,8 @@ public class PointMotionProfile {
         }
         else {
             double ratio = maxDelta / delta;
-            point.x = point.x + (inputPoint.x - point.x) * ratio;
-            point.y = point.y + (inputPoint.y - point.y) * ratio;
+            point.x += (inputPoint.x - point.x) * ratio;
+            point.y += (inputPoint.y - point.y) * ratio;
         }
 
         return point;

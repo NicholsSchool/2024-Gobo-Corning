@@ -34,6 +34,15 @@ public interface DrivetrainConstants {
     /** Back Drive Wheel Angle Offset (270 degrees) */
     double BACK_DRIVE_OFFSET = 1.5 * Math.PI;
 
+    /** Left Drive Wheel Feedforward Coefficient */
+    double LEFT_DRIVE_FF = 10.0;
+
+    /** Right Drive Wheel Feedforward Coefficient */
+    double RIGHT_DRIVE_FF = 10.0;
+
+    /** Back Drive Wheel Feedforward Coefficient */
+    double BACK_DRIVE_FF = 10.0;
+
     /** Thru Bore Encoder ticks per revolution */
     int THRU_BORE_TICKS_PER_REV = 8192;
 

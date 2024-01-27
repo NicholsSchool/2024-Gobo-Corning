@@ -31,6 +31,15 @@ public class RobotPose {
     }
 
     /**
+     * The Point representation of the robot's Position
+     *
+     * @return the robot's (x, y)
+     */
+    public Point toPoint() {
+        return new Point(x, y);
+    }
+
+    /**
      * Returns the Pose data as a String
      *
      * @return (x, y) | angle

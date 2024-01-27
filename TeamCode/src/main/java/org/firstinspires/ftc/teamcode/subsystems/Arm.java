@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+import com.kauailabs.navx.ftc.AHRS;
+import com.qualcomm.hardware.kauailabs.NavxMicroNavigationSensor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -18,7 +20,9 @@ public class Arm implements ArmConstants {
     private final DcMotorEx wrist;
     private final Servo planeLauncher;
     private final FeedbackController armController;
+    private final SimpleFeedbackController climbController;
     private final SimpleFeedbackController wristController;
+    private final AHRS navx;
     private double wristTargetPosition;
     private int armOffset;
     private int wristOffset;
@@ -51,7 +55,11 @@ public class Arm implements ArmConstants {
         planeLauncher.scaleRange(ArmConstants.PLANE_MIN, ArmConstants.PLANE_MAX);
 
         armController = new FeedbackController(SHOULDER_P, 0.0, VERTICAL_P, ARM_VERTICAL);
+        climbController = new SimpleFeedbackController(CLIMB_P);
         wristController = new SimpleFeedbackController(WRIST_P);
+
+        navx = AHRS.getInstance(hardwareMap.get(NavxMicroNavigationSensor.class,
+                "navx"), AHRS.DeviceDataType.kProcessedData);
     }
 
     /**
@@ -63,12 +71,22 @@ public class Arm implements ArmConstants {
     }
 
     /**
+     * Uses a feedback loop based on the NavX pitch to climb
+     */
+    public void climb() {
+        armNoGovernor(climbController.calculate(TARGET_PITCH - navx.getPitch()));
+    }
+
+    /**
      * Moves both shoulder motors together manually
      *
      * @param power the input motor power
      */
     public void armManual(double power) {
-        power = Range.clip(power, -SHOULDER_MAX, SHOULDER_MAX);
+        armNoGovernor(Range.clip(power, -SHOULDER_MAX, SHOULDER_MAX));
+    }
+
+    private void armNoGovernor(double power) {
         leftShoulder.setPower(power);
         rightShoulder.setPower(power);
     }
@@ -165,5 +183,14 @@ public class Arm implements ArmConstants {
     public void offsetEncoders() {
         armOffset = leftShoulder.getCurrentPosition();
         wristOffset = wrist.getCurrentPosition();
+    }
+
+    /**
+     * The Robot's pitch angle
+     *
+     * @return the pitch from the NavX
+     */
+    public double getPitch() {
+        return navx.getPitch();
     }
 }
