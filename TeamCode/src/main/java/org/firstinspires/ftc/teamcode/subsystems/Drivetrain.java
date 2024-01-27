@@ -103,9 +103,9 @@ public class Drivetrain implements DrivetrainConstants {
         double power = driveInput.magnitude();
         double angle = driveInput.angle();
 
-        leftDrive.setPower(turn + power * Math.cos(Math.toRadians(angle + LEFT_DRIVE_OFFSET - pose.angle)));
-        rightDrive.setPower(turn + power * Math.cos(Math.toRadians(angle + RIGHT_DRIVE_OFFSET - pose.angle)));
-        backDrive.setPower(turn + power * Math.cos(Math.toRadians(angle + BACK_DRIVE_OFFSET - pose.angle)));
+        leftDrive.setPower(turn + power * Math.cos(angle + LEFT_DRIVE_OFFSET - pose.angle));
+        rightDrive.setPower(turn + power * Math.cos(angle + RIGHT_DRIVE_OFFSET - pose.angle));
+        backDrive.setPower(turn + power * Math.cos(angle + BACK_DRIVE_OFFSET - pose.angle));
     }
 
     private double turnToAngle() {
