@@ -17,10 +17,10 @@ public interface ParabolicSplineConstants {
     double RIGHT_WAYPOINT_X = 38.0;
 
     /** Spline Intake Coordinate X Value */
-    double INTAKE_X = 56.0;
+    double INTAKE_X = 58.0;
 
     /** Spline Scoring Coordinate X Value */
-    double SCORING_X = -46.0;
+    double SCORING_X = -48.0;
 
     /** The X value for launching the plane */
     double PLANE_LAUNCHING_X = -24.0;

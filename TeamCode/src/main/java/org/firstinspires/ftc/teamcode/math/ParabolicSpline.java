@@ -116,7 +116,7 @@ public class ParabolicSpline implements ParabolicSplineConstants {
         if(robot.x > RIGHT_WAYPOINT_X)
             drive = vectorToVertex(robot, new Point(RIGHT_WAYPOINT_X, CENTER_WAYPOINT_Y), false);
         else if(robot.x > LEFT_WAYPOINT_X)
-            drive = vectorToVertex(robot, new Point(LEFT_WAYPOINT_X, CENTER_WAYPOINT_Y), true);
+            drive = vectorToVertex(robot, new Point(LEFT_WAYPOINT_X, CENTER_WAYPOINT_Y), false);
         else
             drive = vectorFromVertex(robot, scoring, LEFT_WAYPOINT_X, false);
 

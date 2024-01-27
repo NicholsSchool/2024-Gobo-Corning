@@ -51,7 +51,8 @@ public class Point {
     }
 
     /**
-     * Restricts the magnitude of the Point.
+     * Restricts the magnitude of the Point to the maximum
+     * if it is above the maximum
      *
      * @param maxMagnitude the maximum Point magnitude
      *

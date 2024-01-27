@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import java.util.List;
 
-/*
+/**
  * Robot Tensor Flow Vision
  */
 public class TensorFlowVision implements VisionConstants {
@@ -37,6 +37,7 @@ public class TensorFlowVision implements VisionConstants {
         portal = new VisionPortal.Builder()
                 .setCamera(hwMap.get(WebcamName.class, "Webcam 1"))
                 .setStreamFormat(VisionPortal.StreamFormat.YUY2)
+                //.setCameraResolution(idk)
                 .addProcessor(processor)
                 .enableLiveView(true)
                 .build();

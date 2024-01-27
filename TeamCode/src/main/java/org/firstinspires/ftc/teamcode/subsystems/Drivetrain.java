@@ -12,6 +12,7 @@ import com.kauailabs.navx.ftc.AHRS;
 import com.qualcomm.hardware.kauailabs.NavxMicroNavigationSensor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.Range;
 
 /**
  * Robot Drivetrain
@@ -100,7 +101,7 @@ public class Drivetrain implements DrivetrainConstants {
 
         driveInput = driveProfile.calculate(
                 driveInput.restrictMagnitude(lowGear ? VIRTUAL_LOW_GEAR : VIRTUAL_HIGH_GEAR));
-        double power = driveInput.magnitude();
+        double power = Range.clip(driveInput.magnitude(), 0.0, 1.0);
         double angle = driveInput.angle();
 
         leftDrive.setPower(turn + power * Math.cos(angle + LEFT_DRIVE_OFFSET - pose.angle));
@@ -160,7 +161,6 @@ public class Drivetrain implements DrivetrainConstants {
         double yaw = getCorrectedYaw();
         imuOffset = newPose.angle - yaw;
         pose.angle = imuOffset + yaw;
-
         previousHeading = pose.angle;
     }
 

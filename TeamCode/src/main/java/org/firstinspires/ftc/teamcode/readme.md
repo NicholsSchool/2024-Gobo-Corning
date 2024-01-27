@@ -1,14 +1,14 @@
         THINGS TO REMEMBER:
-Add a plane spline path, change teleop spline paths
-Add James's spline Math too
-Check the Navx pitch isn't upside down
-Use all utility classes in every possible spot
+Check that all utility classes are used in every possible spot
+NO STORING ALLIANCE FOR LOOP USE IN ANY OBJECT
+Check loop times of each optimized teleop
+When camera is switched, set Camera Resolution to 1920... in the Vision Portal Build
+Throttle loop times for consistency?
 
         CODE CHANGES TODO:
-Remove all alliance checking in loop methods
-Magnitude scaling if current magnitude is 0???
 Figure out a way to optimize Angles.averageAngles()
-Check loop times of each optimized teleop
+Add BezierSpline too (and BezierSplineConstants)
+Check whether the Navx pitch is upside down (probably is)
 
         CONSTANTS TUNING:
 ArmConstants - tune PlaneLauncher range

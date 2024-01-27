@@ -38,12 +38,12 @@ public class Angles {
     }
 
     /**
-     * Averages two angles in radians
+     * Averages two angles in radians, accounting for angle ranges
      *
-     * @param angle1 the first angle
-     * @param angle2 the second angle
+     * @param angle1 the first angle in radians
+     * @param angle2 the second angle in radians
      *
-     * @return the average in radians, accounting for angle ranges
+     * @return the average in radians
      */
     public static double average(double angle1, double angle2) {
         return Math.atan2(Math.sin(angle1) + Math.sin(angle2), Math.cos(angle1) + Math.cos(angle2));

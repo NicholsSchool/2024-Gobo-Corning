@@ -13,21 +13,20 @@ public interface ArmConstants {
     /** Maximum Shoulder Motor Power */
     double SHOULDER_MAX = 0.3;
 
-
     /** Shoulder Proportional Constant */
-    double SHOULDER_P = 0.001;
+    double SHOULDER_P = 0.002;
 
     /** Shoulder Vertical Constant */
-    double VERTICAL_P = 0.05;
+    double VERTICAL_P = 0.1;
 
     /** Arm Vertical Encoder Position */
     double ARM_VERTICAL = 2770.0;
 
     /** Climbing Proportional Constant */
-    double CLIMB_P = 0.5;
+    double CLIMB_P = 0.1;
 
     /** The Target Climbing Pitch */
-    double TARGET_PITCH = 45.0;
+    double TARGET_PITCH = 60.0;
 
     /** Maximum Wrist Motor Power */
     double WRIST_MAX = 0.2;
