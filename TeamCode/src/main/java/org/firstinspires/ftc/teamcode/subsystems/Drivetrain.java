@@ -34,7 +34,7 @@ public class Drivetrain implements DrivetrainConstants {
      * @param y the initial y coordinate
      * @param initialHeading the initial robot heading in radians
      */
-    public Drivetrain(HardwareMap hwMap, boolean isBlueAlliance, double x, double y, double initialHeading) {
+    public Drivetrain(HardwareMap hwMap, double x, double y, double initialHeading) {
         this.previousHeading = initialHeading;
         this.imuOffset = initialHeading;
         this.targetHeading = initialHeading;
