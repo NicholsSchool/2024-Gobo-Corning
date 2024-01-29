@@ -1,5 +1,9 @@
 package org.firstinspires.ftc.teamcode.math;
 
+import androidx.annotation.NonNull;
+
+import java.util.Locale;
+
 /**
  * A Point (x, y)
  */
@@ -91,4 +95,13 @@ public class Point {
         y = 0.0;
     }
 
+    /**
+     * Returns the Point data as a String to two decimal places
+     *
+     * @return (x, y)
+     */
+    @NonNull
+    public String toString() {
+        return String.format(Locale.US, "(%.2f, %.2f)", x, y);
+    }
 }

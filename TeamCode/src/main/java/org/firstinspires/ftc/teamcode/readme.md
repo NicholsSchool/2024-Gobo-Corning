@@ -1,16 +1,14 @@
         THINGS TO REMEMBER:
-Check that all utility classes are used in every possible spot
 NO STORING ALLIANCE FOR LOOP USE IN ANY OBJECT
-When camera is switched, check what the allowed resolutions are... choose the highest (in both subsystems)
 Check loop times of each optimized teleop
-Throttle loop times for consistency?
 
         CODE CHANGES TODO:
-Add testing Teleops for subsystems
 Figure out a way to optimize Angles.averageAngles()
-Add BezierSpline too (and BezierSplineConstants)
+Add BezierSpline (and Constants)
 Check whether the Navx pitch is upside down (probably is)
-Check whether the spline Drivetrain instance updates automatically (redo if not)
+Check whether the spline Drivetrain instance updates automatically (change class if not)
+When camera is switched, check what the allowed resolutions are... choose the highest (in both subsystems)
+Throttle loop times for consistency???
 
         CLASS TESTING:
 Fully Test Controllers

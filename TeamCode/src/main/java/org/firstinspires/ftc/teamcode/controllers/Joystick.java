@@ -1,6 +1,10 @@
 package org.firstinspires.ftc.teamcode.controllers;
 
+import androidx.annotation.NonNull;
+
 import org.firstinspires.ftc.teamcode.math.Point;
+
+import java.util.Locale;
 
 /**
  * A Controller Joystick
@@ -38,5 +42,15 @@ public class Joystick {
     public void update(double newX, double newY) {
         x.update(newX);
         y.update(newY);
+    }
+
+    /**
+     * Returns the Joystick data as a String to two decimal places
+     *
+     * @return (x, y)
+     */
+    @NonNull
+    public String toString() {
+        return String.format(Locale.US, "(%.2f, %.2f)", x.value(), y.value());
     }
 }

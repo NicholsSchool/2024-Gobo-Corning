@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.constants.ControllerConstants;
 
+import java.util.Locale;
+
 /**
  * A Controller Axis
  */
@@ -39,13 +41,13 @@ public class Axis implements ControllerConstants {
     }
 
     /**
-     * The Axis as a String
+     * The Axis as a String to two decimal places
      *
      * @return whether the Axis is pressed
      */
     @NonNull
     public String toString() {
-        return String.valueOf(value);
+        return String.format(Locale.US, "%.2f", value);
     }
 
     /**

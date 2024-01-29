@@ -7,16 +7,16 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 /**
  * A Sample Teleop
  */
-@TeleOp(name="Template", group="Template Teleops")
+@TeleOp(name="Template", group="Template")
 public class TemplateTeleop extends OpMode {
-    private final ElapsedTime loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
+    private ElapsedTime loopTime;
 
     /**
      * Code to run ONCE when the driver hits INIT
      */
     @Override
     public void init() {
-        telemetry.addData("Status", "Initialized");
+        loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
     }
 
     /**

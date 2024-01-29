@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.teleops;
+package org.firstinspires.ftc.teamcode.teleops.test_teleops;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
@@ -7,13 +7,17 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.controllers.Controller;
+
 /**
- * A Sample Dashboard Teleop
+ * Testing Teleop for Controller
  */
 @Config
-@TeleOp(name="Dashboard Template", group="Template")
-public class TemplateDashboardTeleop extends OpMode {
+@TeleOp(name="Controller Testing", group="Testing")
+public class ControllerTeleop extends OpMode {
     private ElapsedTime loopTime;
+    private Controller controller;
+    private boolean squareToggle;
 
     /**
      * Code to run ONCE when the driver hits INIT
@@ -21,6 +25,7 @@ public class TemplateDashboardTeleop extends OpMode {
     @Override
     public void init() {
         loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
+        controller = new Controller(gamepad1);
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
     }
 
@@ -45,6 +50,26 @@ public class TemplateDashboardTeleop extends OpMode {
      */
     @Override
     public void loop() {
+        controller.update();
+
+        squareToggle = controller.square.wasJustPressed() != squareToggle;
+
+        telemetry.addData("BUTTONS:", "");
+        telemetry.addData("x", controller.x);
+        telemetry.addData("circle", controller.circle);
+        telemetry.addData("square toggle", squareToggle);
+        telemetry.addData("triangle", controller.triangle);
+        telemetry.addData("options", controller.options);
+        telemetry.addData("share", controller.share);
+
+        telemetry.addData("AXES:", "");
+        telemetry.addData("left trigger", controller.leftTrigger);
+        telemetry.addData("right trigger is zero", controller.rightTrigger.hasBeenZero());
+
+        telemetry.addData("JOYSTICKS:", "");
+        telemetry.addData("left joystick", controller.leftStick);
+        telemetry.addData("right joystick", controller.rightStick);
+
         telemetry.addData("loop time", loopTime.time());
         loopTime.reset();
         telemetry.update();
