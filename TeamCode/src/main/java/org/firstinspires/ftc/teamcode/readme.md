@@ -6,10 +6,26 @@ Check loop times of each optimized teleop
 Throttle loop times for consistency?
 
         CODE CHANGES TODO:
+Add testing Teleops for subsystems
 Figure out a way to optimize Angles.averageAngles()
 Add BezierSpline too (and BezierSplineConstants)
 Check whether the Navx pitch is upside down (probably is)
 Check whether the spline Drivetrain instance updates automatically (redo if not)
+
+        CLASS TESTING:
+Fully Test Controllers
+Fully Test Angles
+Fully Test Point and RobotPose
+Fully Test MotionProfile
+Fully Test PointMotionProfile
+Fully Test SimpleFeedbackController
+Fully Test FeedbackController
+Fully Test Hand
+Fully Test Lights
+Fully Test AprilTagVision
+Fully Test TensorFlowVision
+Fully Test Arm
+Fully Test Drivetrain
 
         CONSTANTS TUNING:
 ArmConstants - tune PlaneLauncher range

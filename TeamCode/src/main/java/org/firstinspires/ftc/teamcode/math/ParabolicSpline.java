@@ -34,7 +34,7 @@ public class ParabolicSpline implements ParabolicSplineConstants {
      * @param waypoint the waypoint (wx, wy)
      * @param toIntake whether the robot is going to the intake
      *
-     * @return the drive vector in [x, y] notation
+     * @return the unscaled drive vector in [x, y] notation
      */
     public Point vectorToVertex(Point robot, Point waypoint, boolean toIntake) {
         if(robot.x == waypoint.x)
@@ -54,7 +54,7 @@ public class ParabolicSpline implements ParabolicSplineConstants {
      * @param waypoint the waypoint (wx, wy)
      * @param h  the x value of the previous waypoint
      * @param toIntake whether the robot is going to the intake
-     * @return the drive vector in [x, y] notation
+     * @return the unscaled drive vector in [x, y] notation
      */
     public Point vectorFromVertex(Point robot, Point waypoint, double h, boolean toIntake) {
         if(robot.x == waypoint.x)
@@ -94,7 +94,11 @@ public class ParabolicSpline implements ParabolicSplineConstants {
             drive = vectorFromVertex(robot, INTAKE, RIGHT_WAYPOINT_X, true);
 
         double distance = robot.distance(INTAKE);
-        drive.scaleMagnitude((distance >= SPLINE_ERROR ? SPLINE_P * distance : 0.0));
+
+        if(distance >= SPLINE_ERROR)
+            drive.scaleMagnitude(SPLINE_P * distance);
+        else
+            drive.zero();
 
         drivetrain.drive(drive, turn, autoAlign, lowGear);
     }
@@ -121,7 +125,11 @@ public class ParabolicSpline implements ParabolicSplineConstants {
             drive = vectorFromVertex(robot, scoring, LEFT_WAYPOINT_X, false);
 
         double distance = robot.distance(scoring);
-        drive.scaleMagnitude((distance >= SPLINE_ERROR ? SPLINE_P * distance : 0.0));
+
+        if(distance >= SPLINE_ERROR)
+            drive.scaleMagnitude(SPLINE_P * distance);
+        else
+            drive.zero();
 
         drivetrain.drive(drive, turn, autoAlign, lowGear);
     }
@@ -145,7 +153,11 @@ public class ParabolicSpline implements ParabolicSplineConstants {
             drive = robot.x >= PLANE_LAUNCHING_X ? new Point(-1.0, 0.0) : new Point(1.0, 0.0);
 
         double distance = Math.abs(robot.x - PLANE_LAUNCHING_X);
-        drive.scaleMagnitude((distance >= SPLINE_ERROR ? SPLINE_P * distance : 0.0));
+
+        if(distance >= SPLINE_ERROR)
+            drive.scaleMagnitude(SPLINE_P * distance);
+        else
+            drive.zero();
 
         drivetrain.drive(drive, turn, autoAlign, lowGear);
     }

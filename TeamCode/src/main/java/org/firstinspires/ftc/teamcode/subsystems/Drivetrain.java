@@ -12,7 +12,6 @@ import com.kauailabs.navx.ftc.AHRS;
 import com.qualcomm.hardware.kauailabs.NavxMicroNavigationSensor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.util.Range;
 
 /**
  * Robot Drivetrain
@@ -99,8 +98,8 @@ public class Drivetrain implements DrivetrainConstants {
     public void drive(Point driveInput, double turn, boolean autoAlign, boolean lowGear) {
         turn = turnProfile.calculate(autoAlign ? turnToAngle() : turn);
 
-        driveInput = driveProfile.calculate(
-                driveInput.clipMagnitude(lowGear ? VIRTUAL_LOW_GEAR : VIRTUAL_HIGH_GEAR));
+        driveInput = driveProfile.calculate(driveInput.clipMagnitude(
+                (lowGear ? VIRTUAL_LOW_GEAR : VIRTUAL_HIGH_GEAR) - Math.abs(turn)));
         double power = driveInput.magnitude();
         double angle = driveInput.angle();
 

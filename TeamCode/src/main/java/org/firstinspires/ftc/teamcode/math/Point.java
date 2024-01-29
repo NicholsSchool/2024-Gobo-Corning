@@ -82,4 +82,13 @@ public class Point {
             y *= ratio;
         }
     }
+
+    /**
+     * Sets the point to (0, 0)
+     */
+    public void zero() {
+        x = 0.0;
+        y = 0.0;
+    }
+
 }
