@@ -21,7 +21,6 @@ public class Controller {
     public final Button options;
     public final Button leftStickButton;
     public final Button rightStickButton;
-
     public final Axis leftTrigger;
     public final Axis rightTrigger;
     public final Joystick leftStick;

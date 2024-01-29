@@ -6,7 +6,7 @@ package org.firstinspires.ftc.teamcode.math;
 public class FeedbackController {
     private final double proportional;
     private final double verticalProportional;
-    private final double verticalPosition;
+    private final double cosineCoefficient;
     private double targetPosition;
 
     /**
@@ -21,7 +21,7 @@ public class FeedbackController {
         proportional = p;
         targetPosition = target;
         verticalProportional = verticalP;
-        verticalPosition = verticalPos;
+        cosineCoefficient = Math.PI / (2.0 * verticalPos);
     }
 
     /**
@@ -42,6 +42,6 @@ public class FeedbackController {
      */
     public double calculate(double position) {
         return proportional * (targetPosition - position) +
-                verticalProportional * Math.cos(Math.PI * position / (2.0 * verticalPosition));
+                verticalProportional * Math.cos(position * cosineCoefficient);
     }
 }

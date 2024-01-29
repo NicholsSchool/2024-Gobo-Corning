@@ -100,8 +100,8 @@ public class Drivetrain implements DrivetrainConstants {
         turn = turnProfile.calculate(autoAlign ? turnToAngle() : turn);
 
         driveInput = driveProfile.calculate(
-                driveInput.restrictMagnitude(lowGear ? VIRTUAL_LOW_GEAR : VIRTUAL_HIGH_GEAR));
-        double power = Range.clip(driveInput.magnitude(), 0.0, 1.0);
+                driveInput.clipMagnitude(lowGear ? VIRTUAL_LOW_GEAR : VIRTUAL_HIGH_GEAR));
+        double power = driveInput.magnitude();
         double angle = driveInput.angle();
 
         leftDrive.setPower(turn + power * Math.cos(angle + LEFT_DRIVE_OFFSET - pose.angle));

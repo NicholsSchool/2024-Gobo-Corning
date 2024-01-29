@@ -58,7 +58,7 @@ public class Point {
      *
      * @return this Point after the value restriction
      */
-    public Point restrictMagnitude(double maxMagnitude) {
+    public Point clipMagnitude(double maxMagnitude) {
         double magnitude = magnitude();
         if(magnitude > maxMagnitude) {
             double ratio = maxMagnitude / magnitude;
