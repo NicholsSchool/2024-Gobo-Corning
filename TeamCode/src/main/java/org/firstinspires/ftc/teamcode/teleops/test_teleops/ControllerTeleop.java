@@ -3,11 +3,13 @@ package org.firstinspires.ftc.teamcode.teleops.test_teleops;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.controllers.Controller;
+import org.firstinspires.ftc.teamcode.math.Point;
 
 /**
  * Testing Teleop for Controller
@@ -17,6 +19,7 @@ import org.firstinspires.ftc.teamcode.controllers.Controller;
 public class ControllerTeleop extends OpMode {
     private ElapsedTime loopTime;
     private Controller controller;
+    private FtcDashboard dashboard;
     private boolean squareToggle;
 
     /**
@@ -26,7 +29,8 @@ public class ControllerTeleop extends OpMode {
     public void init() {
         loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
         controller = new Controller(gamepad1);
-        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
+        dashboard = FtcDashboard.getInstance();
+        telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
     }
 
     /**
@@ -63,12 +67,18 @@ public class ControllerTeleop extends OpMode {
         telemetry.addData("share", controller.share);
 
         telemetry.addData("AXES:", "");
-        telemetry.addData("left trigger", controller.leftTrigger);
+        telemetry.addData("left trigger", controller.leftTrigger.value());
         telemetry.addData("right trigger is zero", controller.rightTrigger.hasBeenZero());
 
-        telemetry.addData("JOYSTICKS:", "");
-        telemetry.addData("left joystick", controller.leftStick);
-        telemetry.addData("right joystick", controller.rightStick);
+        Point leftStick = controller.leftStick.toPoint();
+        TelemetryPacket packet = new TelemetryPacket(false);
+        packet.fieldOverlay()
+                .setScale(2.0, 2.0)
+                .setRotation(Math.PI)
+                .drawGrid(0.0, 0.0, 2.0, 2.0, 21, 21)
+                .setFill("red")
+                .fillCircle(leftStick.x, leftStick.y, 0.05);
+        dashboard.sendTelemetryPacket(packet);
 
         telemetry.addData("loop time", loopTime.time());
         loopTime.reset();

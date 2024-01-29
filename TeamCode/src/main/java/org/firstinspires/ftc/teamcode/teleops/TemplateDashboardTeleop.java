@@ -8,12 +8,13 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
- * A Sample Dashboard Teleop
+ * Sample Dashboard Teleop
  */
 @Config
 @TeleOp(name="Dashboard Template", group="Template")
 public class TemplateDashboardTeleop extends OpMode {
     private ElapsedTime loopTime;
+    private FtcDashboard dashboard;
 
     /**
      * Code to run ONCE when the driver hits INIT
@@ -21,7 +22,8 @@ public class TemplateDashboardTeleop extends OpMode {
     @Override
     public void init() {
         loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
-        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
+        dashboard = FtcDashboard.getInstance();
+        telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
     }
 
     /**

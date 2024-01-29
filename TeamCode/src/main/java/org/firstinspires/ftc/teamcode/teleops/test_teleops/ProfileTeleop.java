@@ -78,9 +78,7 @@ public class ProfileTeleop extends OpMode {
                 .fillCircle(leftStick.x, leftStick.y, 0.05);
         dashboard.sendTelemetryPacket(packet);
 
-        double leftTrigger = motionProfile.calculate(controller.leftTrigger.value());
-
-        telemetry.addData("left trigger", leftTrigger);
+        telemetry.addData("left trigger", motionProfile.calculate(controller.leftTrigger.value()));
 
         telemetry.addData("loop time", loopTime.time());
         loopTime.reset();

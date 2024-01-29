@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
- * A Sample Teleop
+ * Sample Teleop
  */
 @TeleOp(name="Template", group="Template")
 public class TemplateTeleop extends OpMode {
