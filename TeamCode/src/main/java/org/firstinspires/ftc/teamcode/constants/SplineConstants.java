@@ -1,9 +1,9 @@
 package org.firstinspires.ftc.teamcode.constants;
 
 /**
- * Constants for Parabolic Spline
+ * Constants for Spline
  */
-public interface ParabolicSplineConstants {
+public interface SplineConstants {
     /** Auto Driving Proportional Constant */
     double SPLINE_P = 0.05;
 

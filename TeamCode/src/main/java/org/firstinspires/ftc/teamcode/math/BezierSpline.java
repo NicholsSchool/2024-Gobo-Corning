@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.math;
 
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.constants.BezierSplineConstants;
+import org.firstinspires.ftc.teamcode.constants.SplineConstants;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 
 import java.util.stream.DoubleStream;
@@ -10,7 +10,7 @@ import java.util.stream.DoubleStream;
 /**
  * Math for Bezier Spline Paths
  */
-public class BezierSpline implements BezierSplineConstants {
+public class BezierSpline implements SplineConstants {
     private final Drivetrain drivetrain;
     private final Point[] points;
     private final double correctionDistance;
@@ -43,7 +43,7 @@ public class BezierSpline implements BezierSplineConstants {
                 3 * Math.pow(t, 2) * (1 - t) * points[2].y + Math.pow(t, 3) * points[3].y;
     }
 
-    private Point tangentSlope(double t) {
+    private Point tangentVector(double t) {
         double firstCoeff = Math.pow(1 - t, 2);
         double secondCoeff = 2 * t * (1 - t);
         double thirdCoeff = Math.pow(t, 2);
@@ -53,7 +53,8 @@ public class BezierSpline implements BezierSplineConstants {
                             thirdCoeff * points[3].x - points[2].x,
                         firstCoeff * (points[1].y - points[0].y) +
                             secondCoeff * (points[2].y - points[1].y) +
-                            thirdCoeff * points[3].y - points[2].y);
+                            thirdCoeff * points[3].y - points[2].y)
+                .scaleMagnitude(1.0);
     }
 
     private double distance(double t) {
@@ -61,13 +62,14 @@ public class BezierSpline implements BezierSplineConstants {
     }
 
     private double desiredT() {
-        double height = distance(1);
+        double height = distance(1.0);
 
-        double desiredT = 0;
+        double desiredT = 0.0;
+        double increment = 1.0 / steps;
 
-        double[] intersections = DoubleStream.iterate(0, n -> n + 1.0 / steps).limit(steps).toArray();
+        double[] intersections = DoubleStream.iterate(0.0, n -> n + increment).limit(steps).toArray();
 
-        for (double intersection : intersections) {
+        for(double intersection : intersections) {
             double thisHeight = distance(intersection);
             if (thisHeight < height) {
                 height = thisHeight;
@@ -88,14 +90,37 @@ public class BezierSpline implements BezierSplineConstants {
      * @return if we are close enough to the destination area
      */
     public boolean spline(double turn, boolean autoAlign, boolean lowGear) {
-//        robotPosition = drivetrain.getRobotPose().toPoint();
-//
-//        double desiredT = desiredT();
-//        double distance = distance(desiredT);
-//        double clippedDistance = Range.clip(distance, 0.0, correctionDistance);
-//        double desiredX = bezierX(desiredT) + ;
-//        double desiredY;
-//        double thetaTrue;
-        return false;
+        robotPosition = drivetrain.getRobotPose().toPoint();
+
+        double error = robotPosition.distance(points[3]);
+
+        Point drive;
+        if(error <= correctionDistance) {
+            drive = robotPosition.slope(points[3]);
+        }
+        else {
+            double desiredT = desiredT();
+            double distanceToCurve = distance(desiredT);
+            double clippedDistance = Range.clip(distanceToCurve, 0.0, correctionDistance);
+
+            Point tangentVector = tangentVector(desiredT);
+
+            drive = robotPosition.slope(new Point(
+                    bezierX(desiredT) + tangentVector.x * (correctionDistance - clippedDistance),
+                    bezierY(desiredT) + tangentVector.y * (correctionDistance - clippedDistance)));
+        }
+
+        boolean isFinished;
+        if(error >= SPLINE_ERROR) {
+            drive.scaleMagnitude(SPLINE_P * error);
+            isFinished = false;
+        }
+        else {
+            drive.zero();
+            isFinished = true;
+        }
+
+        drivetrain.drive(drive, turn, autoAlign, lowGear);
+        return isFinished;
     }
 }

@@ -37,6 +37,17 @@ public class Point {
     }
 
     /**
+     * The unscaled slope (explicit point - implicit point)
+     *
+     * @param otherPoint the explicit Point to compare to
+     *
+     * @return the slope as an (x, y) vector
+     */
+    public Point slope(Point otherPoint) {
+        return new Point(otherPoint.x - x, otherPoint.y - y);
+    }
+
+    /**
      * The absolute value of the Point
      *
      * @return the distance from (0, 0)
@@ -77,14 +88,17 @@ public class Point {
      * magnitude is 0
      *
      * @param newMagnitude the new magnitude
+     *
+     * @return this point after the scaling
      */
-    public void scaleMagnitude(double newMagnitude) {
+    public Point scaleMagnitude(double newMagnitude) {
         double magnitude = magnitude();
         if(magnitude != 0) {
             double ratio = newMagnitude / magnitude;
             x *= ratio;
             y *= ratio;
         }
+        return this;
     }
 
     /**

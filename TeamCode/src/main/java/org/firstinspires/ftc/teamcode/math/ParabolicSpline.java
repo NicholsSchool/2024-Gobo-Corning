@@ -1,12 +1,12 @@
 package org.firstinspires.ftc.teamcode.math;
 
-import org.firstinspires.ftc.teamcode.constants.ParabolicSplineConstants;
+import org.firstinspires.ftc.teamcode.constants.SplineConstants;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 
 /**
  * Math for Parabolic Spline Paths
  */
-public class ParabolicSpline implements ParabolicSplineConstants {
+public class ParabolicSpline implements SplineConstants {
     private final Drivetrain drivetrain;
     private final double WAYPOINT_Y;
     private final Point INTAKE;

@@ -3,12 +3,12 @@ Don't check for alliance in looped methods
 Record the loop times of each optimized teleop
 
         CODE CHANGES:
-Finish BezierSpline (use constants in constructor)              [TODO]
 Spline Drivetrain pointer works??? (change both if not)         [TODO]
 Verify whether the Navx pitch is upside down (probably is)      [TODO]
 Choose highest allowed cam resolution in both subsystems        [TODO]
 Should I put the wrist to float for ground pickup?              [TODO]
 Potentiometer Switch for choosing l/r column in auto            [TODO]
+Add Kalman filter for continuous April Tags???                  [TODO]
 
         CLASS TESTING:
 Fully Test Controllers                  [FINISHED]
@@ -55,11 +55,10 @@ DrivetrainConstants - Tune odometry corrections [TODO]
 
 HandConstants - tune all Grabber ranges         [TODO]
 
-ParabolicSplineConstants - Tune Spline P        [TODO]
-ParabolicSplineConstants - Tune Spline error    [TODO]
-ParabolicSplineConstants - Tune ALL waypoints   [TODO]
-
-BezierSplineConstants - Tune Estimation Values  [TODO]
+SplineConstants - Tune Spline P                 [TODO]
+SplineConstants - Tune Spline error             [TODO]
+SplineConstants - Tune ALL waypoints            [TODO]
+SplineConstants - Make and Tune Bezier Values   [TODO]
 
 VisionConstants - tune camera offsets           [TODO]
 VisionConstants - tune BOTH thresholds          [TODO]
