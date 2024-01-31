@@ -1,0 +1,101 @@
+package org.firstinspires.ftc.teamcode.math;
+
+import com.qualcomm.robotcore.util.Range;
+
+import org.firstinspires.ftc.teamcode.constants.BezierSplineConstants;
+import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
+
+import java.util.stream.DoubleStream;
+
+/**
+ * Math for Bezier Spline Paths
+ */
+public class BezierSpline implements BezierSplineConstants {
+    private final Drivetrain drivetrain;
+    private final Point[] points;
+    private final double correctionDistance;
+    private final int steps;
+    private Point robotPosition;
+
+    /**
+     * Instantiates the BezierSpline
+     *
+     * @param drivetrain the drivetrain
+     * @param points the waypoints
+     * @param correctionDistance the distance threshold for correction
+     * @param steps the number of distance samples to take
+     */
+    public BezierSpline(Drivetrain drivetrain, Point[] points, double correctionDistance, int steps) {
+        this.drivetrain = drivetrain;
+        this.points = points;
+        this.correctionDistance = correctionDistance;
+        this.steps = steps;
+        robotPosition = drivetrain.getRobotPose().toPoint();
+    }
+
+    private double bezierX(double t) {
+        return Math.pow(1 - t, 3) * points[0].x + 3 * t * Math.pow(1 - t, 2) * points[1].x +
+                3 * Math.pow(t, 2) * (1 - t) * points[2].x + Math.pow(t, 3) * points[3].x;
+    }
+
+    private double bezierY(double t) {
+        return Math.pow(1 - t, 3) * points[0].y + 3 * t * Math.pow(1 - t, 2) * points[1].y +
+                3 * Math.pow(t, 2) * (1 - t) * points[2].y + Math.pow(t, 3) * points[3].y;
+    }
+
+    private Point tangentSlope(double t) {
+        double firstCoeff = Math.pow(1 - t, 2);
+        double secondCoeff = 2 * t * (1 - t);
+        double thirdCoeff = Math.pow(t, 2);
+
+        return new Point(firstCoeff * (points[1].x - points[0].x) +
+                            secondCoeff * (points[2].x - points[1].x) +
+                            thirdCoeff * points[3].x - points[2].x,
+                        firstCoeff * (points[1].y - points[0].y) +
+                            secondCoeff * (points[2].y - points[1].y) +
+                            thirdCoeff * points[3].y - points[2].y);
+    }
+
+    private double distance(double t) {
+        return Math.hypot(bezierX(t) - robotPosition.x, bezierY(t) - robotPosition.y);
+    }
+
+    private double desiredT() {
+        double height = distance(1);
+
+        double desiredT = 0;
+
+        double[] intersections = DoubleStream.iterate(0, n -> n + 1.0 / steps).limit(steps).toArray();
+
+        for (double intersection : intersections) {
+            double thisHeight = distance(intersection);
+            if (thisHeight < height) {
+                height = thisHeight;
+                desiredT = intersection;
+            }
+        }
+        return desiredT;
+    }
+
+    /**
+     * With the robot at (x, y), calculates the drive vector of the robot
+     * in order to follow a set Bezier curve
+     *
+     * @param turn the turn speed proportion
+     * @param autoAlign whether to autoAlign
+     * @param lowGear whether to drive in low gear
+     *
+     * @return if we are close enough to the destination area
+     */
+    public boolean spline(double turn, boolean autoAlign, boolean lowGear) {
+//        robotPosition = drivetrain.getRobotPose().toPoint();
+//
+//        double desiredT = desiredT();
+//        double distance = distance(desiredT);
+//        double clippedDistance = Range.clip(distance, 0.0, correctionDistance);
+//        double desiredX = bezierX(desiredT) + ;
+//        double desiredY;
+//        double thetaTrue;
+        return false;
+    }
+}

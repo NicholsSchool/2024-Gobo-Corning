@@ -18,6 +18,9 @@ public interface VisionConstants {
     /** Area of Small April Tags in inches squared */
     double SMALL_TAG_AREA = 4.0;
 
-    /** The Position Threshold for the Center of the Prop Detection */
-    double PROP_THRESHOLD = 450.0;
+    /** The Left Position Threshold for the Detection Center */
+    double LEFT_PROP_THRESHOLD = 250.0;
+
+    /** The Right Position Threshold for the Detection Center */
+    double RIGHT_PROP_THRESHOLD = 550.0;
 }

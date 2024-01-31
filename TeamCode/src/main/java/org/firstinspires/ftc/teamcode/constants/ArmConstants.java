@@ -25,7 +25,7 @@ public interface ArmConstants {
     /** Climbing Proportional Constant */
     double CLIMB_P = 0.1;
 
-    /** The Target Climbing Pitch */
+    /** The Target Climbing Pitch in degrees */
     double TARGET_PITCH = 60.0;
 
     /** Maximum Wrist Motor Power */

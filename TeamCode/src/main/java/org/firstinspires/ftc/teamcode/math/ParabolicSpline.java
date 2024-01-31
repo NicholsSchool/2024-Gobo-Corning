@@ -21,7 +21,6 @@ public class ParabolicSpline implements ParabolicSplineConstants {
         this.drivetrain = drivetrain;
         WAYPOINT_Y = isBlueAlliance ? BLUE_WAYPOINT_Y : RED_WAYPOINT_Y;
         INTAKE = new Point(INTAKE_X, isBlueAlliance ? BLUE_INTAKE_Y : RED_INTAKE_Y);
-
     }
 
     /**
@@ -54,6 +53,7 @@ public class ParabolicSpline implements ParabolicSplineConstants {
      * @param waypoint the waypoint (wx, wy)
      * @param h  the x value of the previous waypoint
      * @param toIntake whether the robot is going to the intake
+     *
      * @return the unscaled drive vector in [x, y] notation
      */
     public Point vectorFromVertex(Point robot, Point waypoint, double h, boolean toIntake) {
@@ -81,8 +81,10 @@ public class ParabolicSpline implements ParabolicSplineConstants {
      * @param turn the turn speed proportion
      * @param autoAlign whether to autoAlign
      * @param lowGear whether to drive in low gear
+     *
+     * @return if we are close enough to the destination area
      */
-    public void splineToIntake(double turn, boolean autoAlign, boolean lowGear) {
+    public boolean splineToIntake(double turn, boolean autoAlign, boolean lowGear) {
         Point robot = drivetrain.getRobotPose().toPoint();
 
         Point drive;
@@ -95,12 +97,18 @@ public class ParabolicSpline implements ParabolicSplineConstants {
 
         double distance = robot.distance(INTAKE);
 
-        if(distance >= SPLINE_ERROR)
+        boolean isFinished;
+        if(distance >= SPLINE_ERROR) {
             drive.scaleMagnitude(SPLINE_P * distance);
-        else
+            isFinished = false;
+        }
+        else {
             drive.zero();
+            isFinished = true;
+        }
 
         drivetrain.drive(drive, turn, autoAlign, lowGear);
+        return isFinished;
     }
 
     /**
@@ -111,8 +119,10 @@ public class ParabolicSpline implements ParabolicSplineConstants {
      * @param autoAlign whether to autoAlign
      * @param scoringY the Y value to end at
      * @param lowGear whether to drive in low gear
+     *
+     * @return if we are close enough to the destination area
      */
-    public void splineToScoring(double turn, boolean autoAlign, double scoringY, boolean lowGear) {
+    public boolean splineToScoring(double turn, boolean autoAlign, double scoringY, boolean lowGear) {
         Point robot = drivetrain.getRobotPose().toPoint();
         Point scoring = new Point(SCORING_X, scoringY);
 
@@ -126,12 +136,18 @@ public class ParabolicSpline implements ParabolicSplineConstants {
 
         double distance = robot.distance(scoring);
 
-        if(distance >= SPLINE_ERROR)
+        boolean isFinished;
+        if(distance >= SPLINE_ERROR) {
             drive.scaleMagnitude(SPLINE_P * distance);
-        else
+            isFinished = false;
+        }
+        else {
             drive.zero();
+            isFinished = true;
+        }
 
         drivetrain.drive(drive, turn, autoAlign, lowGear);
+        return isFinished;
     }
 
     /**
@@ -140,8 +156,10 @@ public class ParabolicSpline implements ParabolicSplineConstants {
      * @param turn the turn speed proportion
      * @param autoAlign whether to autoAlign
      * @param lowGear whether to drive in low gear
+     *
+     * @return if we are close enough to the destination area
      */
-    public void splineToPlane(double turn, boolean autoAlign, boolean lowGear) {
+    public boolean splineToPlane(double turn, boolean autoAlign, boolean lowGear) {
         Point robot = drivetrain.getRobotPose().toPoint();
 
         Point drive;
@@ -154,11 +172,17 @@ public class ParabolicSpline implements ParabolicSplineConstants {
 
         double distance = Math.abs(robot.x - PLANE_LAUNCHING_X);
 
-        if(distance >= SPLINE_ERROR)
+        boolean isFinished;
+        if(distance >= SPLINE_ERROR) {
             drive.scaleMagnitude(SPLINE_P * distance);
-        else
+            isFinished = false;
+        }
+        else {
             drive.zero();
+            isFinished = true;
+        }
 
         drivetrain.drive(drive, turn, autoAlign, lowGear);
+        return isFinished;
     }
 }

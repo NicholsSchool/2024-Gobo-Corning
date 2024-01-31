@@ -10,8 +10,10 @@ import org.firstinspires.ftc.teamcode.math.SimpleFeedbackController;
 
 import com.kauailabs.navx.ftc.AHRS;
 import com.qualcomm.hardware.kauailabs.NavxMicroNavigationSensor;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 /**
  * Robot Drivetrain
@@ -75,9 +77,10 @@ public class Drivetrain implements DrivetrainConstants {
         rightOdometry.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         frontOdometry.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
 
-        leftDrive.setVelocityPIDFCoefficients(0.0, 0.0, 0.0, LEFT_DRIVE_FF);
-        rightDrive.setVelocityPIDFCoefficients(0.0, 0.0, 0.0, RIGHT_DRIVE_FF);
-        backDrive.setVelocityPIDFCoefficients(0.0, 0.0, 0.0, BACK_DRIVE_FF);
+        PIDFCoefficients defaults = leftDrive.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftDrive.setVelocityPIDFCoefficients(defaults.p, defaults.i, defaults.d, LEFT_DRIVE_FF);
+        rightDrive.setVelocityPIDFCoefficients(defaults.p, defaults.i, defaults.d, RIGHT_DRIVE_FF);
+        backDrive.setVelocityPIDFCoefficients(defaults.p, defaults.i, defaults.d, BACK_DRIVE_FF);
 
         navx = AHRS.getInstance(hwMap.get(NavxMicroNavigationSensor.class,
                 "navx"), AHRS.DeviceDataType.kProcessedData);

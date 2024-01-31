@@ -51,6 +51,6 @@ public class Joystick {
      */
     @NonNull
     public String toString() {
-        return String.format(Locale.US, "(%.2f, %.2f)", x.value(), y.value());
+        return String.format(Locale.US, "(%.3f, %.3f)", x.value(), y.value());
     }
 }

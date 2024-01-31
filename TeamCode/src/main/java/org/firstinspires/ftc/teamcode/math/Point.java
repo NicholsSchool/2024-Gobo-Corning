@@ -55,7 +55,7 @@ public class Point {
     }
 
     /**
-     * Restricts the magnitude of the Point to the maximum
+     * Clips the magnitude of the Point to the maximum
      * if it is above the maximum
      *
      * @param maxMagnitude the maximum Point magnitude
@@ -102,6 +102,6 @@ public class Point {
      */
     @NonNull
     public String toString() {
-        return String.format(Locale.US, "(%.2f, %.2f)", x, y);
+        return String.format(Locale.US, "(%.3f, %.3f)", x, y);
     }
 }

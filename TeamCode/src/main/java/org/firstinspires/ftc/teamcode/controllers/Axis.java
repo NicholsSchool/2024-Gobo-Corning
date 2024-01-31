@@ -47,7 +47,7 @@ public class Axis implements ControllerConstants {
      */
     @NonNull
     public String toString() {
-        return String.format(Locale.US, "%.2f", value);
+        return String.format(Locale.US, "%.3f", value);
     }
 
     /**

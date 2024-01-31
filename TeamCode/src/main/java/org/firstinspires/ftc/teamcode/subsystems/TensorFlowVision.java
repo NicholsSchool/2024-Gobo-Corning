@@ -62,10 +62,13 @@ public class TensorFlowVision implements VisionConstants {
         }
 
         if(bestRecognition == null)
-            return PropLocation.LEFT;
+            return PropLocation.CENTER;
 
-        return (bestRecognition.getLeft() + bestRecognition.getRight()) * 0.5 < PROP_THRESHOLD ?
-            PropLocation.CENTER : PropLocation.RIGHT;
+        double propPosition = (bestRecognition.getLeft() + bestRecognition.getRight() ) * 0.5;
+
+        if(propPosition < LEFT_PROP_THRESHOLD)
+            return PropLocation.LEFT;
+        return propPosition < RIGHT_PROP_THRESHOLD ? PropLocation.CENTER : PropLocation.RIGHT;
     }
 
     /**

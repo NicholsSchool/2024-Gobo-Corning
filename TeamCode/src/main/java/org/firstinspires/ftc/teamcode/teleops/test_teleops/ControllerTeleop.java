@@ -61,23 +61,36 @@ public class ControllerTeleop extends OpMode {
         telemetry.addData("BUTTONS:", "");
         telemetry.addData("x", controller.x);
         telemetry.addData("circle", controller.circle);
-        telemetry.addData("square toggle", squareToggle);
+        telemetry.addData("square TOGGLE", squareToggle);
         telemetry.addData("triangle", controller.triangle);
         telemetry.addData("options", controller.options);
         telemetry.addData("share", controller.share);
+        telemetry.addData("dpad up", controller.dpadUp);
+        telemetry.addData("dpad down", controller.dpadDown);
+        telemetry.addData("dpad left", controller.dpadLeft);
+        telemetry.addData("dpad right", controller.dpadRight);
+        telemetry.addData("left stick button", controller.leftStickButton);
+        telemetry.addData("right stick button", controller.rightStickButton);
+
+
+
 
         telemetry.addData("AXES:", "");
         telemetry.addData("left trigger", controller.leftTrigger.value());
-        telemetry.addData("right trigger is zero", controller.rightTrigger.hasBeenZero());
+        telemetry.addData("right trigger zeroed", controller.rightTrigger.hasBeenZero());
 
         Point leftStick = controller.leftStick.toPoint();
+        Point rightStick = controller.rightStick.toPoint();
+
         TelemetryPacket packet = new TelemetryPacket(false);
         packet.fieldOverlay()
                 .setScale(2.0, 2.0)
                 .setRotation(Math.PI)
                 .drawGrid(0.0, 0.0, 2.0, 2.0, 21, 21)
                 .setFill("red")
-                .fillCircle(leftStick.x, leftStick.y, 0.05);
+                .fillCircle(leftStick.x, leftStick.y, 0.05)
+                .setFill("green")
+                .fillCircle(rightStick.x, rightStick.y, 0.05);
         dashboard.sendTelemetryPacket(packet);
 
         telemetry.addData("loop time", loopTime.time());

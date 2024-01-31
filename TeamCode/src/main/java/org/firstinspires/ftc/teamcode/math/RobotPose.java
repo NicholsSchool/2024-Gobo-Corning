@@ -46,7 +46,7 @@ public class RobotPose {
      */
     @NonNull
     public String toString() {
-        return String.format(Locale.US, "(%.1f, %.1f) | %.1f", x, y,
+        return String.format(Locale.US, "(%.2f, %.2f) | %.2f", x, y,
                 Angles.clipDegrees(Math.toDegrees(angle)));
     }
 }
