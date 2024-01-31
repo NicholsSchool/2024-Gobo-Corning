@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.controllers.Controller;
+import org.firstinspires.ftc.teamcode.math.Angles;
 import org.firstinspires.ftc.teamcode.math.Point;
 
 /**
@@ -58,7 +59,7 @@ public class ControllerTeleop extends OpMode {
 
         squareToggle = controller.square.wasJustPressed() != squareToggle;
 
-        telemetry.addData("BUTTONS:", "");
+        telemetry.addData("BUTTONS", "");
         telemetry.addData("x", controller.x);
         telemetry.addData("circle", controller.circle);
         telemetry.addData("square TOGGLE", squareToggle);
@@ -72,10 +73,7 @@ public class ControllerTeleop extends OpMode {
         telemetry.addData("left stick button", controller.leftStickButton);
         telemetry.addData("right stick button", controller.rightStickButton);
 
-
-
-
-        telemetry.addData("AXES:", "");
+        telemetry.addData("AXES", "");
         telemetry.addData("left trigger", controller.leftTrigger.value());
         telemetry.addData("right trigger zeroed", controller.rightTrigger.hasBeenZero());
 
@@ -84,13 +82,12 @@ public class ControllerTeleop extends OpMode {
 
         TelemetryPacket packet = new TelemetryPacket(false);
         packet.fieldOverlay()
-                .setScale(2.0, 2.0)
-                .setRotation(Math.PI)
-                .drawGrid(0.0, 0.0, 2.0, 2.0, 21, 21)
+                .setRotation(1.5 * Math.PI)
+                .drawGrid(0.0, 0.0, 144.0, 144.0, 21, 21)
                 .setFill("red")
-                .fillCircle(leftStick.x, leftStick.y, 0.05)
+                .fillCircle(leftStick.x * 72.0, leftStick.y * 72.0, 5.0)
                 .setFill("green")
-                .fillCircle(rightStick.x, rightStick.y, 0.05);
+                .fillCircle(rightStick.x * 72.0, rightStick.y * 72.0, 5.0);
         dashboard.sendTelemetryPacket(packet);
 
         telemetry.addData("loop time", loopTime.time());
