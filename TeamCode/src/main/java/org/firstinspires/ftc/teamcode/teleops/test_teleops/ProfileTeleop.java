@@ -10,8 +10,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.controllers.Controller;
 import org.firstinspires.ftc.teamcode.math.MotionProfile;
-import org.firstinspires.ftc.teamcode.math.Point;
-import org.firstinspires.ftc.teamcode.math.PointMotionProfile;
+import org.firstinspires.ftc.teamcode.math.Vector;
+import org.firstinspires.ftc.teamcode.math.VectorMotionProfile;
 
 /**
  * Testing Teleop for Motion Profiles
@@ -22,7 +22,7 @@ public class ProfileTeleop extends OpMode {
     private ElapsedTime loopTime;
     private Controller controller;
     private MotionProfile motionProfile;
-    private PointMotionProfile pointMotionProfile;
+    private VectorMotionProfile vectorMotionProfile;
     private FtcDashboard dashboard;
     public static boolean clip;
 
@@ -33,7 +33,7 @@ public class ProfileTeleop extends OpMode {
     public void init() {
         controller = new Controller(gamepad1);
         motionProfile = new MotionProfile(0.5, 0.5);
-        pointMotionProfile = new PointMotionProfile(0.5);
+        vectorMotionProfile = new VectorMotionProfile(0.5);
         loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         dashboard = FtcDashboard.getInstance();
@@ -63,11 +63,11 @@ public class ProfileTeleop extends OpMode {
     public void loop() {
         controller.update();
 
-        Point leftStick = controller.leftStick.toPoint();
+        Vector leftStick = controller.leftStick.toVector();
 
         if(clip)
             leftStick.clipMagnitude(0.5);
-        leftStick = pointMotionProfile.calculate(leftStick);
+        leftStick = vectorMotionProfile.calculate(leftStick);
 
         TelemetryPacket packet = new TelemetryPacket(false);
         packet.fieldOverlay()

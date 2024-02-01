@@ -41,7 +41,7 @@ public class Axis implements ControllerConstants {
     }
 
     /**
-     * The Axis as a String to two decimal places
+     * The Axis as a String to three decimal places
      *
      * @return whether the Axis is pressed
      */

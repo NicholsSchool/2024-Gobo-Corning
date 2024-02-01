@@ -23,7 +23,7 @@ public interface ArmConstants {
     double ARM_VERTICAL = 2770.0;
 
     /** Climbing Proportional Constant */
-    double CLIMB_P = 0.1;
+    double CLIMB_P = 0.005;
 
     /** The Target Climbing Pitch in degrees */
     double TARGET_PITCH = 60.0;

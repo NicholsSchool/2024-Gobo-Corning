@@ -188,9 +188,9 @@ public class Arm implements ArmConstants {
     /**
      * The Robot's pitch angle in degrees
      *
-     * @return the corrected pitch from the NavX
+     * @return the pitch from the NavX
      */
     public double getPitch() {
-        return -navx.getPitch();
+        return navx.getPitch();
     }
 }

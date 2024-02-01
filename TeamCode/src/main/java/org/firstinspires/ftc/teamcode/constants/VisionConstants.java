@@ -10,7 +10,7 @@ public interface VisionConstants {
     double FORWARD_OFFSET = 5.5;
 
     /** Camera Horizontal Offset from the robot center */
-    double HORIZONTAL_OFFSET = 3.0;
+    double HORIZONTAL_OFFSET = 0.0;
 
     /** Area of Large April Tags in inches squared */
     double BIG_TAG_AREA = 25.0;

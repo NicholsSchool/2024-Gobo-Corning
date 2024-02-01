@@ -9,8 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.controllers.Controller;
-import org.firstinspires.ftc.teamcode.math.Angles;
-import org.firstinspires.ftc.teamcode.math.Point;
+import org.firstinspires.ftc.teamcode.math.Vector;
 
 /**
  * Testing Teleop for Controller
@@ -77,8 +76,8 @@ public class ControllerTeleop extends OpMode {
         telemetry.addData("left trigger", controller.leftTrigger.value());
         telemetry.addData("right trigger zeroed", controller.rightTrigger.hasBeenZero());
 
-        Point leftStick = controller.leftStick.toPoint();
-        Point rightStick = controller.rightStick.toPoint();
+        Vector leftStick = controller.leftStick.toVector();
+        Vector rightStick = controller.rightStick.toVector();
 
         TelemetryPacket packet = new TelemetryPacket(false);
         packet.fieldOverlay()

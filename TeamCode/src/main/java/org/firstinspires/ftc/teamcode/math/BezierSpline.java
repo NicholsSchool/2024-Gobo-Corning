@@ -43,17 +43,18 @@ public class BezierSpline implements SplineConstants {
                 3 * Math.pow(t, 2) * (1 - t) * points[2].y + Math.pow(t, 3) * points[3].y;
     }
 
-    private Point tangentVector(double t) {
-        double firstCoeff = Math.pow(1 - t, 2);
-        double secondCoeff = 2 * t * (1 - t);
-        double thirdCoeff = Math.pow(t, 2);
+    private Vector tangentVector(double t) {
+        double firstCoefficient = Math.pow(1 - t, 2);
+        double secondCoefficient = 2 * t * (1 - t);
+        double thirdCoefficient = Math.pow(t, 2);
 
-        return new Point(firstCoeff * (points[1].x - points[0].x) +
-                            secondCoeff * (points[2].x - points[1].x) +
-                            thirdCoeff * points[3].x - points[2].x,
-                        firstCoeff * (points[1].y - points[0].y) +
-                            secondCoeff * (points[2].y - points[1].y) +
-                            thirdCoeff * points[3].y - points[2].y)
+        return new Vector(
+                firstCoefficient * (points[1].x - points[0].x) +
+                            secondCoefficient * (points[2].x - points[1].x) +
+                            thirdCoefficient * points[3].x - points[2].x,
+                firstCoefficient * (points[1].y - points[0].y) +
+                            secondCoefficient * (points[2].y - points[1].y) +
+                            thirdCoefficient * points[3].y - points[2].y)
                 .scaleMagnitude(1.0);
     }
 
@@ -94,7 +95,7 @@ public class BezierSpline implements SplineConstants {
 
         double error = robotPosition.distance(points[3]);
 
-        Point drive;
+        Vector drive;
         if(error <= correctionDistance) {
             drive = robotPosition.slope(points[3]);
         }
@@ -103,11 +104,11 @@ public class BezierSpline implements SplineConstants {
             double distanceToCurve = distance(desiredT);
             double clippedDistance = Range.clip(distanceToCurve, 0.0, correctionDistance);
 
-            Point tangentVector = tangentVector(desiredT);
+            Vector tangent = tangentVector(desiredT);
 
             drive = robotPosition.slope(new Point(
-                    bezierX(desiredT) + tangentVector.x * (correctionDistance - clippedDistance),
-                    bezierY(desiredT) + tangentVector.y * (correctionDistance - clippedDistance)));
+                    bezierX(desiredT) + tangent.x * (correctionDistance - clippedDistance),
+                    bezierY(desiredT) + tangent.y * (correctionDistance - clippedDistance)));
         }
 
         boolean isFinished;

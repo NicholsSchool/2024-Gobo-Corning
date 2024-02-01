@@ -2,9 +2,9 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import org.firstinspires.ftc.teamcode.constants.DrivetrainConstants;
 import org.firstinspires.ftc.teamcode.math.Angles;
-import org.firstinspires.ftc.teamcode.math.PointMotionProfile;
+import org.firstinspires.ftc.teamcode.math.VectorMotionProfile;
 import org.firstinspires.ftc.teamcode.math.MotionProfile;
-import org.firstinspires.ftc.teamcode.math.Point;
+import org.firstinspires.ftc.teamcode.math.Vector;
 import org.firstinspires.ftc.teamcode.math.RobotPose;
 import org.firstinspires.ftc.teamcode.math.SimpleFeedbackController;
 
@@ -21,7 +21,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 public class Drivetrain implements DrivetrainConstants {
     private final DcMotorEx leftDrive, rightDrive, backDrive, frontOdometry, leftOdometry, rightOdometry;
     private final AHRS navx;
-    private final PointMotionProfile driveProfile;
+    private final VectorMotionProfile driveProfile;
     private final MotionProfile turnProfile;
     private final SimpleFeedbackController turnController;
     private final RobotPose pose;
@@ -85,7 +85,7 @@ public class Drivetrain implements DrivetrainConstants {
         navx = AHRS.getInstance(hwMap.get(NavxMicroNavigationSensor.class,
                 "navx"), AHRS.DeviceDataType.kProcessedData);
 
-        driveProfile = new PointMotionProfile(DRIVE_PROFILE_SPEED);
+        driveProfile = new VectorMotionProfile(DRIVE_PROFILE_SPEED);
         turnProfile = new MotionProfile(TURN_PROFILE_SPEED, TURN_PROFILE_MAX);
         turnController = new SimpleFeedbackController(AUTO_ALIGN_P);
     }
@@ -98,7 +98,7 @@ public class Drivetrain implements DrivetrainConstants {
      * @param autoAlign whether to autoAlign
      * @param lowGear whether to put the robot to virtual low gear
      */
-    public void drive(Point driveInput, double turn, boolean autoAlign, boolean lowGear) {
+    public void drive(Vector driveInput, double turn, boolean autoAlign, boolean lowGear) {
         turn = turnProfile.calculate(autoAlign ? turnToAngle() : turn);
 
         driveInput = driveProfile.calculate(driveInput.clipMagnitude(

@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.controllers;
 
 import androidx.annotation.NonNull;
 
-import org.firstinspires.ftc.teamcode.math.Point;
+import org.firstinspires.ftc.teamcode.math.Vector;
 
 import java.util.Locale;
 
@@ -27,10 +27,10 @@ public class Joystick {
     /**
      * The Joystick Position
      *
-     * @return the position as a Point
+     * @return the position as a Vector
      */
-    public Point toPoint() {
-        return new Point(x.value(), y.value());
+    public Vector toVector() {
+        return new Vector(x.value(), y.value());
     }
 
     /**

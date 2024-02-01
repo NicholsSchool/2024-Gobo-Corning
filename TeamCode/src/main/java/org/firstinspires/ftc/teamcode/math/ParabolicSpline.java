@@ -12,7 +12,7 @@ public class ParabolicSpline implements SplineConstants {
     private final Point INTAKE;
 
     /**
-     * Instantiates the ParabolicSpline
+     * Instantiates the Parabolic Spline
      *
      * @param drivetrain the drivetrain
      * @param isBlueAlliance whether we are blue alliance
@@ -35,11 +35,11 @@ public class ParabolicSpline implements SplineConstants {
      *
      * @return the unscaled drive vector in [x, y] notation
      */
-    public Point vectorToVertex(Point robot, Point waypoint, boolean toIntake) {
+    public Vector vectorToVertex(Point robot, Point waypoint, boolean toIntake) {
         if(robot.x == waypoint.x)
-            return toIntake ? new Point(1.0, 0.0) : new Point(-1.0, 0.0);
+            return toIntake ? new Vector(1.0, 0.0) : new Vector(-1.0, 0.0);
 
-        return new Point(waypoint.x - robot.x, (waypoint.y - robot.y) * 2.0);
+        return new Vector(waypoint.x - robot.x, (waypoint.y - robot.y) * 2.0);
     }
 
     /**
@@ -56,22 +56,22 @@ public class ParabolicSpline implements SplineConstants {
      *
      * @return the unscaled drive vector in [x, y] notation
      */
-    public Point vectorFromVertex(Point robot, Point waypoint, double h, boolean toIntake) {
+    public Vector vectorFromVertex(Point robot, Point waypoint, double h, boolean toIntake) {
         if(robot.x == waypoint.x)
-            return toIntake ? new Point(1.0, 0.0) : new Point(-1.0, 0.0);
+            return toIntake ? new Vector(1.0, 0.0) : new Vector(-1.0, 0.0);
 
         double robotDistSquared = Math.pow(robot.x - h, 2);
         double waypointDistSquared = Math.pow(waypoint.x - h, 2);
 
         if(robotDistSquared == waypointDistSquared)
-            return robot.y < waypoint.y ? new Point(0.0, 1.0) : new Point(0.0, -1.0);
+            return robot.y < waypoint.y ? new Vector(0.0, 1.0) : new Vector(0.0, -1.0);
 
         double k = (waypoint.y * robotDistSquared - robot.y * waypointDistSquared)
                 / (robotDistSquared - waypointDistSquared);
 
         return (robot.x > waypoint.x) == toIntake ?
-                new Point(h - robot.x, (k - robot.y) * 2.0) :
-                new Point(robot.x - h, (robot.y - k) * 2.0);
+                new Vector(h - robot.x, (k - robot.y) * 2.0) :
+                new Vector(robot.x - h, (robot.y - k) * 2.0);
     }
 
     /**
@@ -87,7 +87,7 @@ public class ParabolicSpline implements SplineConstants {
     public boolean splineToIntake(double turn, boolean autoAlign, boolean lowGear) {
         Point robot = drivetrain.getRobotPose().toPoint();
 
-        Point drive;
+        Vector drive;
         if(robot.x < LEFT_WAYPOINT_X)
             drive = vectorToVertex(robot, new Point(LEFT_WAYPOINT_X, WAYPOINT_Y), true);
         else if(robot.x < RIGHT_WAYPOINT_X)
@@ -126,7 +126,7 @@ public class ParabolicSpline implements SplineConstants {
         Point robot = drivetrain.getRobotPose().toPoint();
         Point scoring = new Point(SCORING_X, scoringY);
 
-        Point drive;
+        Vector drive;
         if(robot.x > RIGHT_WAYPOINT_X)
             drive = vectorToVertex(robot, new Point(RIGHT_WAYPOINT_X, CENTER_WAYPOINT_Y), false);
         else if(robot.x > LEFT_WAYPOINT_X)
@@ -162,13 +162,13 @@ public class ParabolicSpline implements SplineConstants {
     public boolean splineToPlane(double turn, boolean autoAlign, boolean lowGear) {
         Point robot = drivetrain.getRobotPose().toPoint();
 
-        Point drive;
+        Vector drive;
         if(robot.x > RIGHT_WAYPOINT_X)
             drive = vectorToVertex(robot, new Point(RIGHT_WAYPOINT_X, CENTER_WAYPOINT_Y), false);
         else if(robot.x > LEFT_WAYPOINT_X)
             drive = vectorToVertex(robot, new Point(LEFT_WAYPOINT_X, CENTER_WAYPOINT_Y), false);
         else
-            drive = robot.x >= PLANE_LAUNCHING_X ? new Point(-1.0, 0.0) : new Point(1.0, 0.0);
+            drive = robot.x >= PLANE_LAUNCHING_X ? new Vector(-1.0, 0.0) : new Vector(1.0, 0.0);
 
         double distance = Math.abs(robot.x - PLANE_LAUNCHING_X);
 

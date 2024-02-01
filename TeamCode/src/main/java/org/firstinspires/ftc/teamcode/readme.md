@@ -4,19 +4,19 @@ Record the loop times of each optimized teleop
 
         CODE CHANGES:
 Spline Drivetrain pointer works??? (change both if not)         [TODO]
-Verify whether the Navx pitch is upside down (probably is)      [TODO]
-Choose highest allowed cam resolution in both subsystems        [TODO]
+Verify that the Navx pitch is upside down (probably is)         [TODO]
+Choose highest allowed camera resolution in both subsystems     [TODO]
 Should I put the wrist to float for ground pickup?              [TODO]
 Potentiometer Switch for choosing l/r column in auto            [TODO]
 Add Kalman filter for continuous April Tags???                  [TODO]
 
         CLASS TESTING:
-Fully Test Controllers                  [FINISHED]
+Fully Test Controllers                  [TODO]
 Fully Test Angles                       [TODO]
 Fully Test Point                        [TODO]
 Fully Test RobotPose                    [TODO]
-Fully Test MotionProfile                [FINISHED]
-Fully Test PointMotionProfile           [FINISHED]
+Fully Test MotionProfile                [TODO]
+Fully Test PointMotionProfile           [TODO]
 Fully Test SimpleFeedbackController     [TODO]
 Fully Test FeedbackController           [TODO]
 Fully Test ParabolicSpline              [TODO]
