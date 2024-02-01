@@ -40,7 +40,7 @@ public class RobotPose {
     }
 
     /**
-     * Returns the Pose data as a String to 1 decimal place
+     * Returns the Pose data as a String to 2 decimal places
      *
      * @return (x, y) | angle
      */

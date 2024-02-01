@@ -62,8 +62,8 @@ public class Vector {
     }
 
     /**
-     * Scales this Vector's magnitude, unless this Vector's
-     * magnitude is 0
+     * Scales this Vector's magnitude to the new magnitude,
+     * unless this Vector's magnitude is 0
      *
      * @param newMagnitude the new magnitude
      *

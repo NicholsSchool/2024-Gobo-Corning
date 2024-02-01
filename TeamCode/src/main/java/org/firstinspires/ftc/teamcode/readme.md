@@ -12,9 +12,10 @@ Add Kalman filter for continuous April Tags???                  [TODO]
 
         CLASS TESTING:
 Fully Test Controllers                  [FINISHED]
-Fully Test Angles                       [TODO]
-Fully Test Point                        [TODO]
-Fully Test RobotPose                    [TODO]
+Fully Test Angles                       [FINISHED]
+Fully Test Point                        [FINISHED]
+Fully Test Vector                       [FINISHED]
+Fully Test RobotPose                    [FINISHED]
 Fully Test MotionProfile                [FINISHED]
 Fully Test PointMotionProfile           [FINISHED]
 Fully Test SimpleFeedbackController     [TODO]
@@ -42,7 +43,7 @@ ArmConstants - tune wrist p                     [TODO]
 ArmConstants - tune wrist fourbar positions     [TODO]
 ArmConstants - tune fourbar switching angle     [TODO]
 
-ControllerConstants - tune deadband             [TODO]
+ControllerConstants - tune deadband             [FINISHED]
 ControllerConstants - tune wait time            [TODO]
 
 DrivetrainConstants - Tune Profile Speeds       [TODO]
