@@ -54,7 +54,7 @@ public class Arm implements ArmConstants {
         planeLauncher.setDirection(Servo.Direction.FORWARD);
         planeLauncher.scaleRange(ArmConstants.PLANE_MIN, ArmConstants.PLANE_MAX);
 
-        armController = new FeedbackController(SHOULDER_P, 0.0, VERTICAL_P, ARM_VERTICAL);
+        armController = new FeedbackController(ARM_P, 0.0, ARM_V, ARM_VERTICAL, ARM_HORIZONTAL);
         climbController = new SimpleFeedbackController(CLIMB_P);
         wristController = new SimpleFeedbackController(WRIST_P);
 
@@ -83,7 +83,7 @@ public class Arm implements ArmConstants {
      * @param power the input motor power
      */
     public void armManual(double power) {
-        armNoGovernor(Range.clip(power, -SHOULDER_MAX, SHOULDER_MAX));
+        armNoGovernor(Range.clip(power, -ARM_MAX, ARM_MAX));
     }
 
     private void armNoGovernor(double power) {

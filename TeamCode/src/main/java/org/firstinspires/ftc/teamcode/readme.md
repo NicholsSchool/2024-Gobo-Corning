@@ -1,14 +1,14 @@
         THINGS TO REMEMBER:
 Don't check for alliance in looped methods
-Record the loop times of each optimized teleop
 
         CODE CHANGES:
 Spline Drivetrain pointer works??? (change both if not)         [TODO]
-Verify that the Navx pitch is upside down (probably is)         [TODO]
+Verify that the Navx pitch is actually upside down              [TODO]
 Choose highest allowed camera resolution in both subsystems     [TODO]
 Should I put the wrist to float for ground pickup?              [TODO]
 Potentiometer Switch for choosing l/r column in auto            [TODO]
 Add Kalman filter for continuous April Tags???                  [TODO]
+Better Arm Feedback Loop                                        [TODO]
 
         CLASS TESTING:
 Fully Test Controllers                  [FINISHED]
@@ -18,11 +18,11 @@ Fully Test Vector                       [FINISHED]
 Fully Test RobotPose                    [FINISHED]
 Fully Test MotionProfile                [FINISHED]
 Fully Test PointMotionProfile           [FINISHED]
-Fully Test SimpleFeedbackController     [TODO]
-Fully Test FeedbackController           [TODO]
+Fully Test SimpleFeedbackController     [FINISHED]
+Fully Test FeedbackController           [FINISHED]
 Fully Test ParabolicSpline              [TODO]
 Fully Test BezierSpline                 [TODO]
-Fully Test Hand                         [TODO]
+Fully Test Hand                         [FINISHED]
 Fully Test Lights                       [TODO]
 Fully Test AprilTagVision               [TODO]
 Fully Test TensorFlowVision             [TODO]
@@ -36,6 +36,7 @@ ArmConstants - tune climb max power             [TODO]
 ArmConstants - tune shoulder p                  [TODO]
 ArmConstants - tune shoulder vertical p         [TODO]
 ArmConstants - tune arm vertical position       [TODO]
+ArmConstants - tune arm horizontal position     [TODO]
 ArmConstants - tune Climb p                     [TODO]
 ArmConstants - tune Target Pitch                [TODO]
 ArmConstants - tune wrist max power             [TODO]
@@ -54,7 +55,7 @@ DrivetrainConstants - Tune auto align error     [TODO]
 DrivetrainConstants - tune Drive Motor FF       [TODO]
 DrivetrainConstants - Tune odometry corrections [TODO]
 
-HandConstants - tune all Grabber ranges         [TODO]
+HandConstants - tune all Grabber ranges         [FINISHED]
 
 SplineConstants - Tune Spline P                 [TODO]
 SplineConstants - Tune Spline error             [TODO]

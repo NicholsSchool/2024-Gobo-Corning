@@ -20,12 +20,12 @@ public class Hand implements HandConstants {
     public Hand(HardwareMap hardwareMap) {
         leftGrabber = hardwareMap.get(Servo.class, "leftGrabber");
         leftGrabber.setDirection(Servo.Direction.FORWARD);
-        leftGrabber.scaleRange(HandConstants.LEFT_IN, LEFT_OUT);
+        leftGrabber.scaleRange(HandConstants.LEFT_OUT, LEFT_IN);
         leftGrabber.setPosition(1.0);
 
         rightGrabber = hardwareMap.get(Servo.class, "rightGrabber");
         rightGrabber.setDirection(Servo.Direction.FORWARD);
-        rightGrabber.scaleRange(HandConstants.RIGHT_OUT, RIGHT_IN);
+        rightGrabber.scaleRange(HandConstants.RIGHT_IN, RIGHT_OUT);
         rightGrabber.setPosition(0.0);
 
         leftPosition = true;
@@ -44,7 +44,7 @@ public class Hand implements HandConstants {
      * Toggles the right grabber
      * */
     public void toggleRight() {
-        rightGrabber.setPosition(leftPosition ? 1.0 : 0.0);
+        rightGrabber.setPosition(rightPosition ? 1.0 : 0.0);
         rightPosition = !rightPosition;
     }
 }

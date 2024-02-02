@@ -11,16 +11,19 @@ public interface ArmConstants {
     double PLANE_MAX = 1.0;
 
     /** Maximum Shoulder Motor Power */
-    double SHOULDER_MAX = 0.3;
+    double ARM_MAX = 0.3;
 
     /** Shoulder Proportional Constant */
-    double SHOULDER_P = 0.002;
+    double ARM_P = 0.002;
 
     /** Shoulder Vertical Constant */
-    double VERTICAL_P = 0.1;
+    double ARM_V = 0.1;
 
     /** Arm Vertical Encoder Position */
     double ARM_VERTICAL = 2770.0;
+
+    /** Arm Horizontal Encoder Position */
+    double ARM_HORIZONTAL = 0.0;
 
     /** Climbing Proportional Constant */
     double CLIMB_P = 0.005;
