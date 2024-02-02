@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+import android.util.Size;
+
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import java.util.ArrayList;
@@ -34,8 +36,9 @@ public class AprilTagVision implements VisionConstants {
         VisionPortal portal = new VisionPortal.Builder()
                 .setCamera(hwMap.get(WebcamName.class, "Webcam 1"))
                 .setStreamFormat(VisionPortal.StreamFormat.YUY2)
-                //.setCameraResolution(idk)
+                .setCameraResolution(new Size(1920, 1080))
                 .addProcessor(processor)
+                .enableLiveView(true)
                 .build();
     }
 
@@ -87,11 +90,9 @@ public class AprilTagVision implements VisionConstants {
         double cameraY = isScoringTag ? getTagY(id) + cameraDeltaY : getTagY(id) - cameraDeltaY;
         double fieldHeading = isScoringTag ? -yaw - Math.PI : -yaw;
 
-        double localizedX = cameraX - HORIZONTAL_OFFSET * Math.sin(fieldHeading)
-                - FORWARD_OFFSET * Math.cos(fieldHeading);
+        double localizedX = cameraX - FORWARD_OFFSET * Math.cos(fieldHeading);
 
-        double localizedY = cameraY - FORWARD_OFFSET * Math.sin(fieldHeading)
-                + HORIZONTAL_OFFSET * Math.cos(fieldHeading);
+        double localizedY = cameraY - FORWARD_OFFSET * Math.sin(fieldHeading);
 
         return new double[]{localizedX, localizedY, fieldHeading, range, id, yaw};
     }

@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+import android.util.Size;
+
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.teamcode.constants.VisionConstants;
@@ -31,13 +33,14 @@ public class TensorFlowVision implements VisionConstants {
     public TensorFlowVision(HardwareMap hwMap) {
         processor = new TfodProcessor.Builder()
                 .setModelAssetName("uniPropV1.tflite")
+                .setModelLabels(new String[]{"blue face", "red face"})
                 .setIsModelTensorFlow2(true)
                 .build();
 
         portal = new VisionPortal.Builder()
                 .setCamera(hwMap.get(WebcamName.class, "Webcam 1"))
                 .setStreamFormat(VisionPortal.StreamFormat.YUY2)
-                //.setCameraResolution(idk)
+                .setCameraResolution(new Size(1920, 1080))
                 .addProcessor(processor)
                 .enableLiveView(true)
                 .build();
@@ -62,7 +65,7 @@ public class TensorFlowVision implements VisionConstants {
         }
 
         if(bestRecognition == null)
-            return PropLocation.CENTER;
+            return null;
 
         double propPosition = (bestRecognition.getLeft() + bestRecognition.getRight() ) * 0.5;
 
