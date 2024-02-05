@@ -3,10 +3,9 @@ Don't check for alliance in looped methods
 
         CODE CHANGES:
 Spline Drivetrain pointer works??? (change both if not)         [TODO]
-WRIST WIRING IS WRONG, GET HILLER TO FIX                        [TODO]
-Verify that the Navx pitch is actually upside down              [TODO]
-Should I put the wrist to float for ground pickup?              [TODO]
+
 Better Arm Feedback Loop                                        [TODO]
+
 Add Potentiometer Switch for choosing l/r column in auto        [TODO]
 
 Add Kalman filter for continuous April Tags?                    [TODO]
@@ -32,7 +31,7 @@ Fully Test Arm                          [TODO]
 Fully Test Drivetrain                   [TODO]
 
         CONSTANTS TUNING:
-ArmConstants - tune PlaneLauncher range         [TODO]
+ArmConstants - tune PlaneLauncher range         [FINISHED]
 ArmConstants - tune shoulder max power          [TODO]
 ArmConstants - tune climb max power             [TODO]
 ArmConstants - tune shoulder p                  [TODO]

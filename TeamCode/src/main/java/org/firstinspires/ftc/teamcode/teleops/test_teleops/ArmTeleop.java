@@ -20,6 +20,11 @@ public class ArmTeleop extends OpMode {
     private Controller controller;
     private ElapsedTime loopTime;
     private FtcDashboard dashboard;
+    public static boolean wristFourbar;
+    public static boolean armGoToPosition;
+    public static double armTargetPosition;
+    public static boolean wristGoToPosition;
+    public static double wristTargetPosition;
 
     /**
      * Code to run ONCE when the driver hits INIT
@@ -27,8 +32,6 @@ public class ArmTeleop extends OpMode {
     @Override
     public void init() {
         arm = new Arm(hardwareMap);
-        arm.setArmFloat();
-        arm.setWristFloat();
 
         controller = new Controller(gamepad1);
         loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
@@ -59,12 +62,33 @@ public class ArmTeleop extends OpMode {
     public void loop() {
         controller.update();
 
+        if(controller.leftBumper.isPressed())
+            arm.setArmFloat();
+        if(controller.rightBumper.isPressed())
+            arm.setWristFloat();
+
         if(controller.share.wasJustPressed())
             arm.togglePlane();
 
-        arm.wristManual(controller.leftStick.x.value());
+        if(armGoToPosition) {
+            arm.setTargetArmPosition(armTargetPosition);
+            arm.armToPosition();
+        }
+        else
+            arm.armManual(controller.leftStick.y.value());
+
+        if(wristFourbar)
+            arm.virtualFourbar();
+        else if(wristGoToPosition) {
+            arm.setTargetWristPosition(wristTargetPosition);
+            arm.wristToPosition();
+        }
+        else
+            arm.wristManual(controller.rightStick.y.value());
 
         telemetry.addData("wrist position", arm.getWristPosition());
+        telemetry.addData("arm position", arm.getArmPosition());
+        telemetry.addData("robot pitch", arm.getPitch());
 
         telemetry.addData("loop time", loopTime.time());
         loopTime.reset();

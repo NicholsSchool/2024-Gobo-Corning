@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.kauailabs.navx.ftc.AHRS;
 import com.qualcomm.hardware.kauailabs.NavxMicroNavigationSensor;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -46,7 +47,7 @@ public class Arm implements ArmConstants {
 
         wrist = hardwareMap.get(DcMotorEx.class, "wrist");
         wrist.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-        wrist.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        wrist.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         wrist.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         wrist.setDirection(DcMotorEx.Direction.REVERSE);
 
@@ -188,9 +189,9 @@ public class Arm implements ArmConstants {
     /**
      * The Robot's pitch angle in degrees
      *
-     * @return the pitch from the NavX
+     * @return -1 * the roll from the NavX
      */
     public double getPitch() {
-        return navx.getPitch();
+        return -navx.getRoll();
     }
 }

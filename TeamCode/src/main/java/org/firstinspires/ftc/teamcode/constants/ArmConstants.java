@@ -14,10 +14,10 @@ public interface ArmConstants {
     double ARM_MAX = 0.3;
 
     /** Shoulder Proportional Constant */
-    double ARM_P = 0.002;
+    double ARM_P = 0.0005;
 
     /** Shoulder Vertical Constant */
-    double ARM_V = 0.1;
+    double ARM_V = 0.2;
 
     /** Arm Vertical Encoder Position */
     double ARM_VERTICAL = 2770.0;
@@ -32,10 +32,10 @@ public interface ArmConstants {
     double TARGET_PITCH = 60.0;
 
     /** Maximum Wrist Motor Power */
-    double WRIST_MAX = 0.2;
+    double WRIST_MAX = 0.25;
 
     /** Wrist Proportional Constant */
-    double WRIST_P = 0.0005;
+    double WRIST_P = 0.001;
 
     /** Wrist intaking virtual fourbar position */
     double WRIST_INTAKING = 110.0;
