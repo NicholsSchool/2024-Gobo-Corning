@@ -5,11 +5,11 @@ Don't check for alliance in looped methods
 Spline Drivetrain pointer works??? (change both if not)         [TODO]
 Verify that the Navx pitch is actually upside down              [TODO]
 Should I put the wrist to float for ground pickup?              [TODO]
-Add Potentiometer Switch for choosing l/r column in auto        [TODO]
-Add Kalman filter for continuous April Tags?                    [TODO]
 Better Arm Feedback Loop                                        [TODO]
+Add Potentiometer Switch for choosing l/r column in auto        [TODO]
+
+Add Kalman filter for continuous April Tags?                    [TODO]
 Pixel Recognition during Teleop?                                [TODO]
-Ask Hamid about that faulty recognition problem???              [TODO]
 
         CLASS TESTING:
 Fully Test Controllers                  [FINISHED]
@@ -24,7 +24,7 @@ Fully Test FeedbackController           [FINISHED]
 Fully Test ParabolicSpline              [TODO]
 Fully Test BezierSpline                 [TODO]
 Fully Test Hand                         [FINISHED]
-Fully Test Lights                       [TODO]
+Fully Test Lights                       [FINISHED]
 Fully Test AprilTagVision               [FINISHED]
 Fully Test TensorFlowVision             [FINISHED]
 Fully Test Arm                          [TODO]
