@@ -3,6 +3,7 @@ Don't check for alliance in looped methods
 
         CODE CHANGES:
 Spline Drivetrain pointer works??? (change both if not)         [TODO]
+WRIST WIRING IS WRONG, GET HILLER TO FIX                        [TODO]
 Verify that the Navx pitch is actually upside down              [TODO]
 Should I put the wrist to float for ground pickup?              [TODO]
 Better Arm Feedback Loop                                        [TODO]
