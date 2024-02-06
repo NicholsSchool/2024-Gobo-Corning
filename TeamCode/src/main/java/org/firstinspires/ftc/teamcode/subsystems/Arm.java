@@ -75,7 +75,7 @@ public class Arm implements ArmConstants {
      * Uses a feedback loop based on the NavX pitch to climb
      */
     public void climb() {
-        armNoGovernor(climbController.calculate(TARGET_PITCH - getPitch()));
+        armNoGovernor(climbController.calculate(getPitch() - TARGET_PITCH));
     }
 
     /**
