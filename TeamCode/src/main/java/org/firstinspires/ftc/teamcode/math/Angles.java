@@ -7,6 +7,12 @@ public class Angles {
     /** The ratio of a circle's circumference to its radius */
     public static final double TAO = 2.0 * Math.PI;
 
+    /** Literally Pi divided by 2 */
+    public static final double PI_OVER_TWO = Math.PI / 2.0;
+
+    /** Literally -1 * Pi divided by 2 */
+    public static final double NEGATIVE_PI_OVER_TWO = -Math.PI / 2.0;
+
     /**
      * Clips the angle in the range [-180, 180)
      *

@@ -22,12 +22,6 @@ public interface ArmConstants {
     /** Arm Vertical Encoder Position */
     double ARM_VERTICAL = 2576.0;
 
-    /** Climbing Proportional Constant */
-    double CLIMB_P = 0.005;
-
-    /** The Target Climbing Pitch in degrees */
-    double TARGET_PITCH = 60.0;
-
     /** Maximum Wrist Motor Power */
     double WRIST_MAX = 0.25;
 

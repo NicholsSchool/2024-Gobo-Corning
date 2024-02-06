@@ -8,32 +8,27 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.controllers.Controller;
-import org.firstinspires.ftc.teamcode.subsystems.Arm;
+import org.firstinspires.ftc.teamcode.math.Angles;
+import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 
 /**
- * Teleop for the Arm
+ * Teleop for the Drivetrain
  */
 @Config
-@TeleOp(name="Arm Testing", group="Testing")
-public class ArmTeleop extends OpMode {
-    private Arm arm;
+@TeleOp(name="Drivetrain Testing", group="Testing")
+public class DrivetrainTeleop extends OpMode {
+    private Drivetrain drivetrain;
     private Controller controller;
     private ElapsedTime loopTime;
     private FtcDashboard dashboard;
-    public static boolean wristFourbar;
-    public static boolean armGoToPosition;
-    public static double armTargetPosition;
-    public static boolean wristGoToPosition;
-    public static double wristTargetPosition;
 
     /**
      * Code to run ONCE when the driver hits INIT
      */
     @Override
     public void init() {
-        arm = new Arm(hardwareMap);
-
         controller = new Controller(gamepad1);
+        drivetrain = new Drivetrain(hardwareMap, 0.0, 0.0, Math.PI / 2.0);
         loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
         dashboard = FtcDashboard.getInstance();
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
@@ -61,36 +56,27 @@ public class ArmTeleop extends OpMode {
     @Override
     public void loop() {
         controller.update();
+        drivetrain.update();
 
-        if(controller.leftBumper.isPressed())
-            arm.setArmFloat();
-        if(controller.rightBumper.isPressed())
-            arm.setWristFloat();
+        if(controller.dpadUp.wasJustPressed())
+            drivetrain.setTargetHeading(Angles.PI_OVER_TWO);
+        else if(controller.dpadDown.wasJustPressed())
+            drivetrain.setTargetHeading(Angles.NEGATIVE_PI_OVER_TWO);
+        else if(controller.dpadRight.wasJustPressed())
+            drivetrain.setTargetHeading(0.0);
+        else if(controller.dpadLeft.wasJustPressed())
+            drivetrain.setTargetHeading(Math.PI);
 
-        if(controller.share.wasJustPressed())
-            arm.togglePlane();
+        drivetrain.drive(
+                controller.leftStick.toVector(),
+                controller.rightStick.x.value(),
+                controller.rightTrigger.value() > 0.0,
+                controller.leftTrigger.value() <= 0.0);
 
-        if(controller.leftTrigger.value() > 0.0)
-            arm.climb(0.0);
-        else if(armGoToPosition) {
-            arm.setTargetArmPosition(armTargetPosition);
-            arm.armToPosition();
-        }
-        else
-            arm.armManual(controller.leftStick.y.value());
-
-        if(wristFourbar)
-            arm.virtualFourbar();
-        else if(wristGoToPosition) {
-            arm.setTargetWristPosition(wristTargetPosition);
-            arm.wristToPosition();
-        }
-        else
-            arm.wristManual(controller.rightStick.y.value());
-
-        telemetry.addData("wrist position", arm.getWristPosition());
-        telemetry.addData("arm position", arm.getArmPosition());
-        telemetry.addData("robot pitch", arm.getPitch());
+        double[] motorVelocities = drivetrain.getMotorVelocities();
+        telemetry.addData("left vel", motorVelocities[0]);
+        telemetry.addData("right vel", motorVelocities[1]);
+        telemetry.addData("back vel", motorVelocities[2]);
 
         telemetry.addData("loop time", loopTime.time());
         loopTime.reset();

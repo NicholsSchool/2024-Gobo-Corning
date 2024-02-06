@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.kauailabs.navx.ftc.AHRS;
 import com.qualcomm.hardware.kauailabs.NavxMicroNavigationSensor;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -21,7 +20,6 @@ public class Arm implements ArmConstants {
     private final DcMotorEx wrist;
     private final Servo planeLauncher;
     private final FeedbackController armController;
-    private final SimpleFeedbackController climbController;
     private final SimpleFeedbackController wristController;
     private final AHRS navx;
     private double wristTargetPosition;
@@ -56,7 +54,6 @@ public class Arm implements ArmConstants {
         planeLauncher.scaleRange(ArmConstants.PLANE_MIN, ArmConstants.PLANE_MAX);
 
         armController = new FeedbackController(ARM_P, 0.0, ARM_V, ARM_VERTICAL);
-        climbController = new SimpleFeedbackController(CLIMB_P);
         wristController = new SimpleFeedbackController(WRIST_P);
 
         navx = AHRS.getInstance(hardwareMap.get(NavxMicroNavigationSensor.class,
@@ -73,9 +70,11 @@ public class Arm implements ArmConstants {
 
     /**
      * Uses a feedback loop based on the NavX pitch to climb
+     *
+     * @param power the power proportion
      */
-    public void climb() {
-        armNoGovernor(climbController.calculate(getPitch() - TARGET_PITCH));
+    public void climb(double power) {
+        armNoGovernor(-Math.abs(power));
     }
 
     /**

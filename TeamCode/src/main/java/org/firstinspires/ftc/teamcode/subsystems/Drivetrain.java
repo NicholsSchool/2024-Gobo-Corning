@@ -84,6 +84,7 @@ public class Drivetrain implements DrivetrainConstants {
 
         navx = AHRS.getInstance(hwMap.get(NavxMicroNavigationSensor.class,
                 "navx"), AHRS.DeviceDataType.kProcessedData);
+        navx.zeroYaw();
 
         driveProfile = new VectorMotionProfile(DRIVE_PROFILE_SPEED);
         turnProfile = new MotionProfile(TURN_PROFILE_SPEED, TURN_PROFILE_MAX);

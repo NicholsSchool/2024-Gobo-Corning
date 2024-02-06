@@ -23,7 +23,7 @@ public interface DrivetrainConstants {
     double AUTO_ALIGN_P = 0.275;
 
     /** Auto Align allowed error in radians */
-    double AUTO_ALIGN_ERROR = 0.00872664625;
+    double AUTO_ALIGN_ERROR = 0.00872664625997;
 
     /** Left Drive Wheel Angle Offset (30 degrees) */
     double LEFT_DRIVE_OFFSET = Math.PI / 6.0;
