@@ -7,7 +7,6 @@ public class FeedbackController {
     private final double proportional;
     private final double verticalProportional;
     private final double cosineCoefficient;
-    private final double horizontalPosition;
     private double targetPosition;
 
     /**
@@ -16,14 +15,13 @@ public class FeedbackController {
      * @param p the proportional constant
      * @param target the initial target position
      * @param v the power constant based on vertical error
-     * @param verticalPos the vertical position
+     * @param verticalPosition the vertical position
      */
-    public FeedbackController(double p, double target, double v, double verticalPos, double horizontalPos) {
+    public FeedbackController(double p, double target, double v, double verticalPosition) {
         proportional = p;
         targetPosition = target;
         verticalProportional = v;
-        cosineCoefficient = Math.PI / (2.0 * (verticalPos - horizontalPos));
-        horizontalPosition = horizontalPos;
+        cosineCoefficient = Math.PI / (2.0 * verticalPosition);
     }
 
     /**
@@ -44,6 +42,6 @@ public class FeedbackController {
      */
     public double calculate(double position) {
         return proportional * (targetPosition - position) +
-                verticalProportional * Math.cos((position - horizontalPosition) * cosineCoefficient);
+                verticalProportional * Math.cos(position * cosineCoefficient);
     }
 }

@@ -55,7 +55,7 @@ public class Arm implements ArmConstants {
         planeLauncher.setDirection(Servo.Direction.FORWARD);
         planeLauncher.scaleRange(ArmConstants.PLANE_MIN, ArmConstants.PLANE_MAX);
 
-        armController = new FeedbackController(ARM_P, 0.0, ARM_V, ARM_VERTICAL, ARM_HORIZONTAL);
+        armController = new FeedbackController(ARM_P, 0.0, ARM_V, ARM_VERTICAL);
         climbController = new SimpleFeedbackController(CLIMB_P);
         wristController = new SimpleFeedbackController(WRIST_P);
 

@@ -2,9 +2,9 @@
 Don't check for alliance in looped methods
 
         CODE CHANGES:
-Spline Drivetrain pointer works??? (change both if not)         [TODO]
+Make Arm Go to Position less violent                            [TODO]
 
-Better Arm Feedback Loop                                        [TODO]
+Spline Drivetrain pointer works??? (change both if not)         [TODO]
 
 Add Potentiometer Switch for choosing l/r column in auto        [TODO]
 
@@ -32,18 +32,17 @@ Fully Test Drivetrain                   [TODO]
 
         CONSTANTS TUNING:
 ArmConstants - tune PlaneLauncher range         [FINISHED]
-ArmConstants - tune shoulder max power          [TODO]
+ArmConstants - tune shoulder max power          [FINISHED]
+ArmConstants - tune shoulder p                  [FINISHED]
+ArmConstants - tune shoulder vertical p         [FINISHED]
+ArmConstants - tune arm vertical position       [FINISHED]
+ArmConstants - tune wrist max power             [FINISHED]
+ArmConstants - tune wrist p                     [FINISHED]
+ArmConstants - tune wrist fourbar positions     [FINISHED]
+ArmConstants - tune fourbar switching angle     [FINISHED]
 ArmConstants - tune climb max power             [TODO]
-ArmConstants - tune shoulder p                  [TODO]
-ArmConstants - tune shoulder vertical p         [TODO]
-ArmConstants - tune arm vertical position       [TODO]
-ArmConstants - tune arm horizontal position     [TODO]
 ArmConstants - tune Climb p                     [TODO]
 ArmConstants - tune Target Pitch                [TODO]
-ArmConstants - tune wrist max power             [TODO]
-ArmConstants - tune wrist p                     [TODO]
-ArmConstants - tune wrist fourbar positions     [TODO]
-ArmConstants - tune fourbar switching angle     [TODO]
 
 ControllerConstants - tune deadband             [FINISHED]
 ControllerConstants - tune wait time            [TODO]

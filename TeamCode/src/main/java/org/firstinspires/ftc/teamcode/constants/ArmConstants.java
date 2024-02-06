@@ -11,19 +11,16 @@ public interface ArmConstants {
     double PLANE_MAX = 1.0;
 
     /** Maximum Shoulder Motor Power */
-    double ARM_MAX = 0.3;
+    double ARM_MAX = 0.4;
 
     /** Shoulder Proportional Constant */
-    double ARM_P = 0.0005;
+    double ARM_P = 0.00075;
 
     /** Shoulder Vertical Constant */
-    double ARM_V = 0.2;
+    double ARM_V = 0.05;
 
     /** Arm Vertical Encoder Position */
-    double ARM_VERTICAL = 2770.0;
-
-    /** Arm Horizontal Encoder Position */
-    double ARM_HORIZONTAL = 0.0;
+    double ARM_VERTICAL = 2576.0;
 
     /** Climbing Proportional Constant */
     double CLIMB_P = 0.005;
@@ -45,4 +42,16 @@ public interface ArmConstants {
 
     /** Arm position to switch the wrist virtual fourbar position at */
     double FOURBAR_SWITCHING_POSITION = 300;
+
+    /** Arm target position for ground pickup */
+    double GROUND_POSITION = 0.0;
+
+    /** Arm target position for drone launch (actual position is 920) */
+    double DRONE_POSITION = 1100.0;
+
+    /** Arm target position for scoring pixels (actual position is 920) */
+    double SCORING_POSITION = 1100.0;
+
+    /** Arm target position for climbing (actual position is 2100) */
+    double CLIMB_POSITION = 2200.0;
 }
