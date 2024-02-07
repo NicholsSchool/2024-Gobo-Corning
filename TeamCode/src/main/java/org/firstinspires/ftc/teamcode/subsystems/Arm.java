@@ -69,7 +69,7 @@ public class Arm implements ArmConstants {
     }
 
     /**
-     * Uses a feedback loop based on the NavX pitch to climb
+     * Sets arm power without a governor. Only allows downwards motion.
      *
      * @param power the power proportion
      */
@@ -183,14 +183,5 @@ public class Arm implements ArmConstants {
     public void offsetEncoders() {
         armOffset = leftShoulder.getCurrentPosition();
         wristOffset = wrist.getCurrentPosition();
-    }
-
-    /**
-     * The Robot's pitch angle in degrees
-     *
-     * @return -1 * the roll from the NavX
-     */
-    public double getPitch() {
-        return -navx.getRoll();
     }
 }

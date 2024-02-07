@@ -25,6 +25,7 @@ public class ArmTeleop extends OpMode {
     public static double armTargetPosition;
     public static boolean wristGoToPosition;
     public static double wristTargetPosition;
+    public static boolean engageClimber;
 
     /**
      * Code to run ONCE when the driver hits INIT
@@ -70,8 +71,8 @@ public class ArmTeleop extends OpMode {
         if(controller.share.wasJustPressed())
             arm.togglePlane();
 
-        if(controller.leftTrigger.value() > 0.0)
-            arm.climb(0.0);
+        if(engageClimber)
+            arm.climb(controller.leftStick.y.value());
         else if(armGoToPosition) {
             arm.setTargetArmPosition(armTargetPosition);
             arm.armToPosition();
@@ -90,7 +91,6 @@ public class ArmTeleop extends OpMode {
 
         telemetry.addData("wrist position", arm.getWristPosition());
         telemetry.addData("arm position", arm.getArmPosition());
-        telemetry.addData("robot pitch", arm.getPitch());
 
         telemetry.addData("loop time", loopTime.time());
         loopTime.reset();

@@ -27,7 +27,7 @@ Fully Test Hand                         [FINISHED]
 Fully Test Lights                       [FINISHED]
 Fully Test AprilTagVision               [FINISHED]
 Fully Test TensorFlowVision             [FINISHED]
-Fully Test Arm                          [TODO]
+Fully Test Arm                          [FINISHED]
 Fully Test Drivetrain                   [TODO]
 
         CONSTANTS TUNING:
@@ -40,9 +40,6 @@ ArmConstants - tune wrist max power             [FINISHED]
 ArmConstants - tune wrist p                     [FINISHED]
 ArmConstants - tune wrist fourbar positions     [FINISHED]
 ArmConstants - tune fourbar switching angle     [FINISHED]
-ArmConstants - tune climb max power             [TODO]
-ArmConstants - tune Climb p                     [TODO]
-ArmConstants - tune Target Pitch                [TODO]
 
 ControllerConstants - tune deadband             [FINISHED]
 ControllerConstants - tune wait time            [TODO]
