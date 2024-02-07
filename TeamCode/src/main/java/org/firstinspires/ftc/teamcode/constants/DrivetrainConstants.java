@@ -20,9 +20,9 @@ public interface DrivetrainConstants {
     double VIRTUAL_HIGH_GEAR = 0.75;
 
     /** Auto Align Proportional Constant */
-    double AUTO_ALIGN_P = 0.275;
+    double AUTO_ALIGN_P = 0.45;
 
-    /** Auto Align allowed error in radians */
+    /** Auto Align allowed error in radians (.5 degrees) */
     double AUTO_ALIGN_ERROR = 0.00872664625997;
 
     /** Left Drive Wheel Angle Offset (30 degrees) */
@@ -34,14 +34,11 @@ public interface DrivetrainConstants {
     /** Back Drive Wheel Angle Offset (270 degrees) */
     double BACK_DRIVE_OFFSET = 1.5 * Math.PI;
 
-    /** Left Drive Wheel Feedforward Coefficient */
-    double LEFT_DRIVE_FF = 10.0;
+    /** Drive Motor Proportional Gain */
+    double DRIVE_P = 16.0;
 
-    /** Right Drive Wheel Feedforward Coefficient */
-    double RIGHT_DRIVE_FF = 10.0;
-
-    /** Back Drive Wheel Feedforward Coefficient */
-    double BACK_DRIVE_FF = 10.0;
+    /** Drive Motor Integral Gain */
+    double DRIVE_I = 6.0;
 
     /** The Maximum Ticks per second velocity of 20:1 Hex Motors */
     double MAX_MOTOR_VELOCITY = 2800.0;

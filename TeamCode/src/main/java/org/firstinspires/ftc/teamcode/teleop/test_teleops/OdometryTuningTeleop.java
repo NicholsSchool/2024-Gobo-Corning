@@ -13,11 +13,11 @@ import org.firstinspires.ftc.teamcode.math.RobotPose;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 
 /**
- * Teleop for the Drivetrain
+ * Teleop for Tuning Odometry
  */
 @Config
-@TeleOp(name="Drivetrain Testing", group="Testing")
-public class DrivetrainTeleop extends OpMode {
+@TeleOp(name="Odometry Tuning", group="Tuning")
+public class OdometryTuningTeleop extends OpMode {
     private Drivetrain drivetrain;
     private Controller controller;
     private ElapsedTime loopTime;
@@ -30,6 +30,7 @@ public class DrivetrainTeleop extends OpMode {
     public void init() {
         controller = new Controller(gamepad1);
         drivetrain = new Drivetrain(hardwareMap, 0.0, 0.0, Angles.PI_OVER_TWO);
+        drivetrain.setFloat();
         loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
         dashboard = FtcDashboard.getInstance();
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
@@ -59,22 +60,14 @@ public class DrivetrainTeleop extends OpMode {
         controller.update();
         drivetrain.update();
 
-        if(controller.triangle.wasJustPressed())
-            drivetrain.setTargetHeading(Angles.PI_OVER_TWO);
-        else if(controller.x.wasJustPressed())
-            drivetrain.setTargetHeading(Angles.NEGATIVE_PI_OVER_TWO);
-        else if(controller.circle.wasJustPressed())
-            drivetrain.setTargetHeading(0.0);
-        else if(controller.square.wasJustPressed())
-            drivetrain.setTargetHeading(Math.PI);
+        RobotPose pose = drivetrain.getRobotPose();
+        telemetry.addData("x", pose.x);
+        telemetry.addData("y", pose.y);
 
-        drivetrain.drive(
-                controller.leftStick.toVector(),
-                controller.rightStick.x.value(),
-                controller.rightStick.x.hasBeenZero(),
-                controller.leftTrigger.value() <= 0.0);
-
-        telemetry.addData("pose", drivetrain.getRobotPose());
+        double[] odometryRaw = drivetrain.getOdometryPositions();
+        telemetry.addData("left position", odometryRaw[0]);
+        telemetry.addData("right position", odometryRaw[1]);
+        telemetry.addData("back position", odometryRaw[2]);
 
         telemetry.addData("loop time", loopTime.time());
         loopTime.reset();

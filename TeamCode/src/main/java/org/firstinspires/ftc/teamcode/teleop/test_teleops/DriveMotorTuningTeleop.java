@@ -5,9 +5,7 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.constants.DrivetrainConstants;
@@ -64,21 +62,12 @@ public class DriveMotorTuningTeleop extends OpMode implements DrivetrainConstant
         rightDrive.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         backDrive.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
-        PIDFCoefficients defaults = leftDrive.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftDrive.setVelocityPIDFCoefficients(defaults.p, defaults.i, defaults.d, LEFT_DRIVE_FF);
-        rightDrive.setVelocityPIDFCoefficients(defaults.p, defaults.i, defaults.d, RIGHT_DRIVE_FF);
-        backDrive.setVelocityPIDFCoefficients(defaults.p, defaults.i, defaults.d, BACK_DRIVE_FF);
+        leftDrive.setVelocityPIDFCoefficients(DRIVE_P, DRIVE_I, 0.0, 0.0);
+        rightDrive.setVelocityPIDFCoefficients(DRIVE_P, DRIVE_I, 0.0, 0.0);
+        backDrive.setVelocityPIDFCoefficients(DRIVE_P, DRIVE_I, 0.0, 0.0);
 
-
-        p = defaults.p;
-        i = defaults.i;
-        d = defaults.d;
-        backFF = BACK_DRIVE_FF;
-        leftFF = LEFT_DRIVE_FF;
-        rightFF = RIGHT_DRIVE_FF;
-
-        driveProfile = new VectorMotionProfile(DRIVE_PROFILE_SPEED);
-        turnProfile = new MotionProfile(TURN_PROFILE_SPEED, TURN_PROFILE_MAX);
+        driveProfile = new VectorMotionProfile(DRIVE_PROFILE_SPEED * .5);
+        turnProfile = new MotionProfile(TURN_PROFILE_SPEED * .5, TURN_PROFILE_MAX);
 
         loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
         dashboard = FtcDashboard.getInstance();
@@ -117,8 +106,8 @@ public class DriveMotorTuningTeleop extends OpMode implements DrivetrainConstant
                 controller.rightStick.x.value(),
                 controller.leftTrigger.value() <= 0.0);
 
-        telemetry.addData("left velocity", backDrive.getVelocity());
-        telemetry.addData("right velocity", backDrive.getVelocity());
+        telemetry.addData("left velocity", leftDrive.getVelocity());
+        telemetry.addData("right velocity", rightDrive.getVelocity());
         telemetry.addData("back velocity", backDrive.getVelocity());
         telemetry.addData("left target", targets[0]);
         telemetry.addData("right target", targets[1]);
