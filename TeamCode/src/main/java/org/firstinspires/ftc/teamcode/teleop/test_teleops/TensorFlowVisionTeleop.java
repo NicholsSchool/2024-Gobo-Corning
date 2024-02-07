@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.teleops.test_teleops;
+package org.firstinspires.ftc.teamcode.teleop.test_teleops;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
@@ -7,19 +7,17 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.controllers.Controller;
-import org.firstinspires.ftc.teamcode.subsystems.Hand;
+import org.firstinspires.ftc.teamcode.subsystems.TensorFlowVision;
 
 /**
- * Testing Teleop for Hand
+ * Teleop for Testing Tensor Flow Vision
  */
 @Config
-@TeleOp(name="Hand Testing", group="Testing")
-public class HandTeleop extends OpMode {
+@TeleOp(name="Tensor Flow Vision Testing", group="Testing")
+public class TensorFlowVisionTeleop extends OpMode {
     private ElapsedTime loopTime;
     private FtcDashboard dashboard;
-    private Controller controller;
-    private Hand hand;
+    private TensorFlowVision vision;
 
     /**
      * Code to run ONCE when the driver hits INIT
@@ -29,8 +27,7 @@ public class HandTeleop extends OpMode {
         loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
         dashboard = FtcDashboard.getInstance();
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
-        hand = new Hand(hardwareMap);
-        controller = new Controller(gamepad1);
+        vision = new TensorFlowVision(hardwareMap);
     }
 
     /**
@@ -38,7 +35,10 @@ public class HandTeleop extends OpMode {
      */
     @Override
     public void init_loop() {
-
+        telemetry.addData("prop location", vision.getPropPosition());
+        telemetry.addData("loop time", loopTime.time());
+        loopTime.reset();
+        telemetry.update();
     }
 
     /**
@@ -46,7 +46,7 @@ public class HandTeleop extends OpMode {
      */
     @Override
     public void start() {
-
+        vision.close();
     }
 
     /**
@@ -54,14 +54,6 @@ public class HandTeleop extends OpMode {
      */
     @Override
     public void loop() {
-        controller.update();
-
-        if(controller.leftBumper.wasJustPressed())
-            hand.toggleLeft();
-
-        if(controller.rightBumper.wasJustPressed())
-            hand.toggleRight();
-
         telemetry.addData("loop time", loopTime.time());
         loopTime.reset();
         telemetry.update();

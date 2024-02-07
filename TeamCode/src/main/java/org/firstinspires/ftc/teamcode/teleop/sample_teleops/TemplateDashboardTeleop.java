@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.teleops.test_teleops;
+package org.firstinspires.ftc.teamcode.teleop.sample_teleops;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
@@ -7,17 +7,14 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.subsystems.TensorFlowVision;
-
 /**
- * Teleop for Testing Tensor Flow Vision
+ * Sample Dashboard Teleop
  */
 @Config
-@TeleOp(name="Tensor Flow Vision Testing", group="Testing")
-public class TensorFlowVisionTeleop extends OpMode {
+@TeleOp(name="Dashboard Template", group="Template")
+public class TemplateDashboardTeleop extends OpMode {
     private ElapsedTime loopTime;
     private FtcDashboard dashboard;
-    private TensorFlowVision vision;
 
     /**
      * Code to run ONCE when the driver hits INIT
@@ -27,7 +24,6 @@ public class TensorFlowVisionTeleop extends OpMode {
         loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
         dashboard = FtcDashboard.getInstance();
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
-        vision = new TensorFlowVision(hardwareMap);
     }
 
     /**
@@ -35,10 +31,7 @@ public class TensorFlowVisionTeleop extends OpMode {
      */
     @Override
     public void init_loop() {
-        telemetry.addData("prop location", vision.getPropPosition());
-        telemetry.addData("loop time", loopTime.time());
-        loopTime.reset();
-        telemetry.update();
+
     }
 
     /**
@@ -46,7 +39,7 @@ public class TensorFlowVisionTeleop extends OpMode {
      */
     @Override
     public void start() {
-        vision.close();
+
     }
 
     /**

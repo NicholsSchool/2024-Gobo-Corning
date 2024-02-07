@@ -43,6 +43,9 @@ public interface DrivetrainConstants {
     /** Back Drive Wheel Feedforward Coefficient */
     double BACK_DRIVE_FF = 10.0;
 
+    /** The Maximum Ticks per second velocity of 20:1 Hex Motors */
+    double MAX_MOTOR_VELOCITY = 2800.0;
+
     /** Thru Bore Encoder ticks per revolution */
     int THRU_BORE_TICKS_PER_REV = 8192;
 

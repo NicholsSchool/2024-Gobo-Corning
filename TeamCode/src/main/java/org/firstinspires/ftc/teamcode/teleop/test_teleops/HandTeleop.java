@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.teleops.sample_teleops;
+package org.firstinspires.ftc.teamcode.teleop.test_teleops;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
@@ -7,14 +7,19 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.controllers.Controller;
+import org.firstinspires.ftc.teamcode.subsystems.Hand;
+
 /**
- * Sample Dashboard Teleop
+ * Testing Teleop for Hand
  */
 @Config
-@TeleOp(name="Dashboard Template", group="Template")
-public class TemplateDashboardTeleop extends OpMode {
+@TeleOp(name="Hand Testing", group="Testing")
+public class HandTeleop extends OpMode {
     private ElapsedTime loopTime;
     private FtcDashboard dashboard;
+    private Controller controller;
+    private Hand hand;
 
     /**
      * Code to run ONCE when the driver hits INIT
@@ -24,6 +29,8 @@ public class TemplateDashboardTeleop extends OpMode {
         loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
         dashboard = FtcDashboard.getInstance();
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
+        hand = new Hand(hardwareMap);
+        controller = new Controller(gamepad1);
     }
 
     /**
@@ -47,6 +54,14 @@ public class TemplateDashboardTeleop extends OpMode {
      */
     @Override
     public void loop() {
+        controller.update();
+
+        if(controller.leftBumper.wasJustPressed())
+            hand.toggleLeft();
+
+        if(controller.rightBumper.wasJustPressed())
+            hand.toggleRight();
+
         telemetry.addData("loop time", loopTime.time());
         loopTime.reset();
         telemetry.update();

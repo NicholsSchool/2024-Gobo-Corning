@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.teleops.test_teleops;
+package org.firstinspires.ftc.teamcode.teleop.test_teleops;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
@@ -9,26 +9,33 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.controllers.Controller;
+import org.firstinspires.ftc.teamcode.math.MotionProfile;
 import org.firstinspires.ftc.teamcode.math.Vector;
+import org.firstinspires.ftc.teamcode.math.VectorMotionProfile;
 
 /**
- * Testing Teleop for Controller
+ * Testing Teleop for Motion Profiles
  */
 @Config
-@TeleOp(name="Controller Testing", group="Testing")
-public class ControllerTeleop extends OpMode {
+@TeleOp(name="Profile Testing", group="Testing")
+public class ProfileTeleop extends OpMode {
     private ElapsedTime loopTime;
     private Controller controller;
+    private MotionProfile motionProfile;
+    private VectorMotionProfile vectorMotionProfile;
     private FtcDashboard dashboard;
-    private boolean squareToggle;
+    public static boolean clip;
 
     /**
      * Code to run ONCE when the driver hits INIT
      */
     @Override
     public void init() {
-        loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
         controller = new Controller(gamepad1);
+        motionProfile = new MotionProfile(0.5, 0.5);
+        vectorMotionProfile = new VectorMotionProfile(0.5);
+        loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
+        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         dashboard = FtcDashboard.getInstance();
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
     }
@@ -56,38 +63,21 @@ public class ControllerTeleop extends OpMode {
     public void loop() {
         controller.update();
 
-        squareToggle = controller.square.wasJustPressed() != squareToggle;
-
-        telemetry.addData("BUTTONS", "");
-        telemetry.addData("x", controller.x);
-        telemetry.addData("circle", controller.circle);
-        telemetry.addData("square TOGGLE", squareToggle);
-        telemetry.addData("triangle", controller.triangle);
-        telemetry.addData("options", controller.options);
-        telemetry.addData("share", controller.share);
-        telemetry.addData("dpad up", controller.dpadUp);
-        telemetry.addData("dpad down", controller.dpadDown);
-        telemetry.addData("dpad left", controller.dpadLeft);
-        telemetry.addData("dpad right", controller.dpadRight);
-        telemetry.addData("left stick button", controller.leftStickButton);
-        telemetry.addData("right stick button", controller.rightStickButton);
-
-        telemetry.addData("AXES", "");
-        telemetry.addData("left trigger", controller.leftTrigger.value());
-        telemetry.addData("right trigger zeroed", controller.rightTrigger.hasBeenZero());
-
         Vector leftStick = controller.leftStick.toVector();
-        Vector rightStick = controller.rightStick.toVector();
+
+        if(clip)
+            leftStick.clipMagnitude(0.5);
+        leftStick = vectorMotionProfile.calculate(leftStick);
 
         TelemetryPacket packet = new TelemetryPacket(false);
         packet.fieldOverlay()
                 .setRotation(1.5 * Math.PI)
                 .drawGrid(0.0, 0.0, 144.0, 144.0, 21, 21)
                 .setFill("red")
-                .fillCircle(leftStick.x * 72.0, leftStick.y * 72.0, 5.0)
-                .setFill("green")
-                .fillCircle(rightStick.x * 72.0, rightStick.y * 72.0, 5.0);
+                .fillCircle(leftStick.x * 72.0, leftStick.y * 72.0, 5.0);
         dashboard.sendTelemetryPacket(packet);
+
+        telemetry.addData("left trigger", motionProfile.calculate(controller.leftTrigger.value()));
 
         telemetry.addData("loop time", loopTime.time());
         loopTime.reset();
