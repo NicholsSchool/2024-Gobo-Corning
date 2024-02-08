@@ -65,9 +65,9 @@ public class OdometryTuningTeleop extends OpMode {
         telemetry.addData("y", pose.y);
 
         double[] odometryRaw = drivetrain.getOdometryPositions();
-        telemetry.addData("left position", odometryRaw[0]);
-        telemetry.addData("right position", odometryRaw[1]);
-        telemetry.addData("back position", odometryRaw[2]);
+        telemetry.addData("left raw ticks", odometryRaw[0]);
+        telemetry.addData("right raw ticks", odometryRaw[1]);
+        telemetry.addData("front raw ticks", odometryRaw[2]);
 
         telemetry.addData("loop time", loopTime.time());
         loopTime.reset();
