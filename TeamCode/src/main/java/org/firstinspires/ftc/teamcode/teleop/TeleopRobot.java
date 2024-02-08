@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -29,6 +30,7 @@ public class TeleopRobot implements ArmConstants, DrivetrainConstants {
     private final double[] armSetPositions;
     private final double[] autoAlignPositions;
     private final double directionCoefficient;
+    private boolean sawAprilTag;
 
     /**
      * Instantiates the TeleopRobot
@@ -80,8 +82,12 @@ public class TeleopRobot implements ArmConstants, DrivetrainConstants {
         drivetrain.update();
 
         RobotPose visionPose = driverOI.share.isPressed() ? vision.update() : null;
-        if(visionPose != null)
+        if(visionPose != null) {
             drivetrain.setPose(visionPose);
+            sawAprilTag = true;
+        }
+        else
+            sawAprilTag = false;
     }
 
     private void armControls() {
@@ -111,7 +117,12 @@ public class TeleopRobot implements ArmConstants, DrivetrainConstants {
             arm.setTargetArmPosition(arm.getArmPosition());
         }
 
-        if(operatorOI.rightStick.y.hasBeenZero())
+        if(operatorOI.x.wasJustPressed())
+            arm.setTargetWristPosition(-50.0);
+
+        if(operatorOI.x.isPressed())
+            arm.wristToPosition();
+        else if(operatorOI.rightStick.y.hasBeenZero())
             arm.virtualFourbar();
         else
             arm.wristManual(operatorOI.rightStick.y.value());
@@ -123,8 +134,8 @@ public class TeleopRobot implements ArmConstants, DrivetrainConstants {
 
         boolean lowGear = driverOI.leftTrigger.value() <= 0.5;
 
-        driveVector.x = directionCoefficient;
-        driveVector.y = directionCoefficient;
+        driveVector.x *= directionCoefficient;
+        driveVector.y *= directionCoefficient;
 
         if(lowGear) {
             driveVector.x *= VIRTUAL_LOW_GEAR;
@@ -148,7 +159,7 @@ public class TeleopRobot implements ArmConstants, DrivetrainConstants {
         else if(driverOI.square.wasJustPressed())
             drivetrain.setTargetHeading(autoAlignPositions[3]);
 
-            drivetrain.drive(driveVector, turn, autoAlign, lowGear);
+        drivetrain.drive(driveVector, turn, autoAlign, lowGear);
     }
 
     private void handControls() {
@@ -159,6 +170,9 @@ public class TeleopRobot implements ArmConstants, DrivetrainConstants {
     }
 
     private void lightsControls() {
-        lights.setAllianceColor();
+        if(sawAprilTag)
+            lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
+        else
+            lights.setAllianceColor();
     }
 }

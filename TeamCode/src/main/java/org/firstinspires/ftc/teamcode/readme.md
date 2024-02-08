@@ -5,6 +5,9 @@ Don't check for alliance in looped methods
 Make Arm Go to Position less violent                            [TODO]
 
 Spline Drivetrain pointer works??? (change both if not)         [TODO]
+More honest spline distance estimates in both                   [TODO]
+
+Maybe Change Controls for arm selections for alliance           [TODO]
 
 Add Potentiometer Switch for choosing l/r column in auto        [TODO]
 
