@@ -22,7 +22,7 @@ public class RedTeleop extends OpMode implements RobotConstants {
     @Override
     public void init() {
         loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
-        robot = new TeleopRobot(hardwareMap, 0.0, 0.0, Angles.PI_OVER_TWO, IS_RED_ALLIANCE, gamepad1, gamepad2);
+        robot = new TeleopRobot(hardwareMap, 0.0, 0.0, Angles.NEGATIVE_PI_OVER_TWO, IS_RED_ALLIANCE, gamepad1, gamepad2);
     }
 
     /**

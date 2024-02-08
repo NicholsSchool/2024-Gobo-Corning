@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.teleop.test_teleops;
+package org.firstinspires.ftc.teamcode.teleop.tuning_teleops;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
@@ -58,6 +58,7 @@ public class OdometryTuningTeleop extends OpMode {
     @Override
     public void loop() {
         controller.update();
+
         drivetrain.update();
 
         RobotPose pose = drivetrain.getRobotPose();

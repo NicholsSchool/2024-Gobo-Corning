@@ -91,10 +91,10 @@ public class TeleopRobot implements ArmConstants, DrivetrainConstants {
     }
 
     private void armControls() {
-        if(operatorOI.share.wasJustPressed())
+        if(operatorOI.options.wasJustPressed())
             arm.offsetEncoders();
 
-        if(operatorOI.options.wasJustPressed())
+        if(operatorOI.share.wasJustPressed())
             arm.togglePlane();
 
         if(operatorOI.dpadDown.wasJustPressed())
