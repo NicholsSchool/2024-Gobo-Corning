@@ -1,20 +1,22 @@
-        THINGS TO REMEMBER:
-Don't check for alliance in looped methods
+            CODE CHANGES:
 
-        CODE CHANGES:
-Make Arm Go to Position less violent                            [TODO]
+    //FOR THIS COMPETITION
+Add more arm height selections                                  [TODO]
+Remove field oriented d-pad for operator                        [TODO]
+Add autos                                                       [TODO]
+
+    //FOR NEXT COMPETITION
+Fix odometry, completely non-functional                         [TODO]
+
+Add Potentiometer Switch for choosing l/r column in auto        [TODO]
 
 Spline Drivetrain pointer works??? (change both if not)         [TODO]
 More honest spline distance estimates in both                   [TODO]
 
-Maybe Change Controls for arm selections for alliance           [TODO]
-
-Add Potentiometer Switch for choosing l/r column in auto        [TODO]
-
 Add Kalman filter for continuous April Tags?                    [TODO]
-Pixel Recognition during Teleop?                                [TODO]
+Pixel Recognition?                                              [TODO]
 
-        CLASS TESTING:
+            CLASS TESTING:
 Fully Test Controllers                  [FINISHED]
 Fully Test Angles                       [FINISHED]
 Fully Test Point                        [FINISHED]
@@ -33,7 +35,7 @@ Fully Test TensorFlowVision             [FINISHED]
 Fully Test Arm                          [FINISHED]
 Fully Test Drivetrain                   [TODO]
 
-        CONSTANTS TUNING:
+            CONSTANTS TUNING:
 ArmConstants - tune PlaneLauncher range         [FINISHED]
 ArmConstants - tune shoulder max power          [FINISHED]
 ArmConstants - tune shoulder p                  [FINISHED]
@@ -43,6 +45,7 @@ ArmConstants - tune wrist max power             [FINISHED]
 ArmConstants - tune wrist p                     [FINISHED]
 ArmConstants - tune wrist fourbar positions     [FINISHED]
 ArmConstants - tune fourbar switching angle     [FINISHED]
+ArmConstants - tune arm set positions           [TODO]
 
 ControllerConstants - tune deadband             [FINISHED]
 ControllerConstants - tune wait time            [FINISHED]

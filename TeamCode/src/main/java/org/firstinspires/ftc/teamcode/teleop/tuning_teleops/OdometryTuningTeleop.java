@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.controllers.Controller;
 import org.firstinspires.ftc.teamcode.math.Angles;
 import org.firstinspires.ftc.teamcode.math.RobotPose;
+import org.firstinspires.ftc.teamcode.math.Vector;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 
 /**
@@ -30,7 +31,6 @@ public class OdometryTuningTeleop extends OpMode {
     public void init() {
         controller = new Controller(gamepad1);
         drivetrain = new Drivetrain(hardwareMap, 0.0, 0.0, Angles.PI_OVER_TWO);
-        drivetrain.setFloat();
         loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
         dashboard = FtcDashboard.getInstance();
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
@@ -61,9 +61,17 @@ public class OdometryTuningTeleop extends OpMode {
 
         drivetrain.update();
 
+        if(controller.leftTrigger.value() >= 0.5)
+            drivetrain.drive(new Vector(0.0, controller.leftStick.y.value() * 0.5)
+                    , 0.0, true, true);
+        else
+            drivetrain.drive(new Vector(controller.leftStick.x.value() * 0.5, 0.0)
+                    , 0.0, true, true);
+
         RobotPose pose = drivetrain.getRobotPose();
         telemetry.addData("x", pose.x);
         telemetry.addData("y", pose.y);
+        telemetry.addData("angle", pose.angle);
 
         double[] odometryRaw = drivetrain.getOdometryPositions();
         telemetry.addData("left raw ticks", odometryRaw[0]);
