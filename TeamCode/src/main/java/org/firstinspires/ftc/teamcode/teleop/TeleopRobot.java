@@ -17,7 +17,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Hand;
 import org.firstinspires.ftc.teamcode.subsystems.Lights;
 
 /**
- * Robot Container for Teleop
+ * Robot Container for the Teleop Period
  */
 public class TeleopRobot implements ArmConstants, DrivetrainConstants {
     private final Controller driverOI;
@@ -45,7 +45,7 @@ public class TeleopRobot implements ArmConstants, DrivetrainConstants {
      */
     public TeleopRobot(HardwareMap hwMap, double x, double y, double angle, boolean isBlue, Gamepad g1, Gamepad g2) {
         vision = new AprilTagVision(hwMap);
-        arm = new Arm(hwMap);
+        arm = new Arm(hwMap, 0, 0);
         drivetrain = new Drivetrain(hwMap, x, y, angle);
         hand = new Hand(hwMap);
         lights = new Lights(hwMap, isBlue);

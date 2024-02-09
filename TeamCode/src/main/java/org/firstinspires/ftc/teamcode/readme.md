@@ -1,4 +1,9 @@
-            CODE CHANGES:
+        NOTES:
+Find offsets of the arm, store in ArmConstants. Put in as Arm parameter
+Close TensorFlowVision before initializing April Tag Vision.
+
+
+        CODE CHANGES:
 
     //FOR THIS COMPETITION
 Add more arm height selections                                  [TODO]

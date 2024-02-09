@@ -29,8 +29,12 @@ public class Arm implements ArmConstants {
 
     /**
      * Initializes the Arm
+     *
+     * @param hardwareMap the hardware map
+     * @param armOffset the initial arm offset
+     * @param wristOffset the initial wrist offset
      */
-    public Arm(HardwareMap hardwareMap) {
+    public Arm(HardwareMap hardwareMap, int armOffset, int wristOffset) {
         leftShoulder = hardwareMap.get(DcMotorEx.class, "leftShoulder");
         leftShoulder.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
         leftShoulder.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
@@ -58,6 +62,9 @@ public class Arm implements ArmConstants {
 
         navx = AHRS.getInstance(hardwareMap.get(NavxMicroNavigationSensor.class,
                 "navx"), AHRS.DeviceDataType.kProcessedData);
+
+        this.armOffset = armOffset;
+        this.wristOffset = wristOffset;
     }
 
     /**

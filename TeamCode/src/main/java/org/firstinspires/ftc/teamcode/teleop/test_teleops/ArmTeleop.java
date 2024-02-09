@@ -32,7 +32,7 @@ public class ArmTeleop extends OpMode {
      */
     @Override
     public void init() {
-        arm = new Arm(hardwareMap);
+        arm = new Arm(hardwareMap, 0, 0);
 
         controller = new Controller(gamepad1);
         loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
