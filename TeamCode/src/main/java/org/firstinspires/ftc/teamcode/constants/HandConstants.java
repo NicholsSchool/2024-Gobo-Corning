@@ -5,13 +5,13 @@ package org.firstinspires.ftc.teamcode.constants;
  */
 public interface HandConstants {
     /** Left Grabber In Position */
-    double LEFT_IN = 0.6;
+    double LEFT_IN = 0.61;
 
     /** Left Grabber Out Position */
     double LEFT_OUT = 0.45;
 
     /** Right Grabber In Position */
-    double RIGHT_IN = 0.2;
+    double RIGHT_IN = 0.19;
 
     /** Left Grabber Out Position */
     double RIGHT_OUT = 0.4;
