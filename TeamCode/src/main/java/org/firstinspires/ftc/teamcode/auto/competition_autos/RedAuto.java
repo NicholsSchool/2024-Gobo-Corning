@@ -40,11 +40,14 @@ public class RedAuto extends LinearOpMode implements DrivetrainConstants, ArmCon
 
         double[][] points1 = new double[][]{{35.8, 62.8}, {35.8, 62.8}, {35.4, 33.6}, {35.4, 33.6}};
         double[][] points2 = new double[][]{{36.0, 38.0}, {47.4, 69.6}, {76.8, 22.1}, {38.8, 4.2}};
+        double[][] points4 = new double[][]{{-47.0, 37.1}, {-47.8, 29.5}, {-39.6, 8.4}, {-64.4, 11.8}};
 
         Spline spline1 = new Spline (points1, 20, drivetrain, 100);
         Spline spline2 = new Spline(points2, 10, drivetrain, 250);
+        Spline spline4 = new Spline(points4, 10, drivetrain, 250);
         spline1.update();
         spline2.update();
+        spline4.update();
 
         PropDetector.PropLocation propPosition = null;
         while (opModeInInit()) {
@@ -251,6 +254,43 @@ public class RedAuto extends LinearOpMode implements DrivetrainConstants, ArmCon
             drivetrain.drive(new Vector(0, 0), 0, true, false);
 
         }
+
+        while (spline4.desiredT() < 0.96) {
+            spline4.update();
+            double[] robotPose = new double[]{drivetrain.getRobotPose().x, drivetrain.getRobotPose().y};
+
+            double jamesSplineError = Math.hypot(robotPose[0] - points2[3][0], robotPose[1] - points2[3][1]);
+
+            arm.setTargetArmPosition(0);
+            arm.armToPosition();
+
+            arm.virtualFourbar();
+
+            telemetry.addData("wrist", arm.getWristPosition());
+            telemetry.update();
+
+            double turn = 0;
+            boolean autoAlign = true;
+
+            double desiredT = spline4.desiredT();
+
+            drivetrain.drive(new Vector(Math.cos(spline4.angle()), Math.sin(spline4.angle())), turn, autoAlign, true);
+            if (sampleTime.time() > 10) {
+                spline4.update();
+                sampleTime.reset();
+            }
+
+        }
+        waitTime.reset();
+        while(waitTime.time() < 1){
+            arm.setTargetArmPosition(0);
+            arm.setTargetWristPosition(0);
+            drivetrain.setTargetHeading(-Math.PI / 2);
+            arm.armToPosition();
+            arm.wristToPosition();
+            drivetrain.drive(new Vector(0, 0), 0, true, false);
+        }
+
         terminateOpModeNow();
     }
 }
