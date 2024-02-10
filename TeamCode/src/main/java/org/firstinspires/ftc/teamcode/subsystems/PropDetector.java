@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Robot Tensor Flow Vision
  */
-public class TensorFlowVision implements VisionConstants {
+public class PropDetector implements VisionConstants {
     /**
      * The Three Autonomous Prop Locations
      */
@@ -26,11 +26,11 @@ public class TensorFlowVision implements VisionConstants {
     private final VisionPortal portal;
 
     /**
-     * Initializes the TensorFlowVision
+     * Initializes the PropDetector
      *
      * @param hwMap the hardware map
      */
-    public TensorFlowVision(HardwareMap hwMap) {
+    public PropDetector(HardwareMap hwMap) {
         processor = new TfodProcessor.Builder()
                 .setModelAssetName("uniPropV1.tflite")
                 .setModelLabels(new String[]{"blue face", "red face"})

@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.subsystems.TensorFlowVision;
+import org.firstinspires.ftc.teamcode.subsystems.PropDetector;
 
 /**
  * Teleop for Testing Tensor Flow Vision
@@ -17,7 +17,7 @@ import org.firstinspires.ftc.teamcode.subsystems.TensorFlowVision;
 public class TensorFlowVisionTeleop extends OpMode {
     private ElapsedTime loopTime;
     private FtcDashboard dashboard;
-    private TensorFlowVision vision;
+    private PropDetector vision;
 
     /**
      * Code to run ONCE when the driver hits INIT
@@ -27,7 +27,7 @@ public class TensorFlowVisionTeleop extends OpMode {
         loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
         dashboard = FtcDashboard.getInstance();
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
-        vision = new TensorFlowVision(hardwareMap);
+        vision = new PropDetector(hardwareMap);
     }
 
     /**

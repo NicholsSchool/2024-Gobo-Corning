@@ -49,7 +49,6 @@ public class OdometryTuningTeleop extends OpMode {
      */
     @Override
     public void start() {
-
     }
 
     /**
@@ -58,7 +57,6 @@ public class OdometryTuningTeleop extends OpMode {
     @Override
     public void loop() {
         controller.update();
-
         drivetrain.update();
 
         if(controller.leftTrigger.value() >= 0.5)

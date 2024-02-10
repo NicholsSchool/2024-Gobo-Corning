@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 /**
  * Sample Auto
  */
-@Autonomous(name="Template", group="Template")
+@Autonomous(name="TemplateAuto", group="Template")
 public class SampleAuto extends LinearOpMode {
     @Override
     public void runOpMode() {

@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.constants;
 
 /**
- * Constants for AprilTagVision and TensorFlowVision.
+ * Constants for AprilTagVision and PropDetector.
  * April Tag Field Coordinates are not stored here,
  * but can be found in <code>AprilTagGameDatabase.java</code>
  */
