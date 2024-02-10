@@ -38,16 +38,13 @@ public class BlueAuto extends LinearOpMode implements DrivetrainConstants, ArmCo
         lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.GRAY);
 
 
-        double[][] points1 = new double[][]{{35.8, -62.8}, {35.8, -62.8}, {35.4, -40.6}, {35.4, -34.6}};
+        double[][] points1 = new double[][]{{35.8, -62.8}, {35.8, -62.8}, {35.4, -33.6}, {35.4, -33.6}};
         double[][] points2 = new double[][]{{36.0, -38.0}, {47.4, -69.6}, {76.8, -22.1}, {38.8, -4.2}};
-        double[][] points3 = new double[][]{{38.8, -4.2}, {-22.4, -9.7}, {-45.7, 7.8}, {-44.0, -34.5}};
 
         Spline spline1 = new Spline (points1, 20, drivetrain, 100);
-        Spline spline2 = new Spline(points2, 20, drivetrain, 100);
-        Spline spline3 = new Spline(points3, 20, drivetrain, 100);
+        Spline spline2 = new Spline(points2, 10, drivetrain, 100);
         spline1.update();
         spline2.update();
-        spline3.update();
 
         PropDetector.PropLocation propPosition = null;
         while (opModeInInit()) {
@@ -67,21 +64,30 @@ public class BlueAuto extends LinearOpMode implements DrivetrainConstants, ArmCo
         double purplePixelAngle = Math.PI / 2;
         double swipeHeading = Math.PI / 2;
 
+        double endpoint = -34.6;
+
         if (propPosition != null) {
             if (propPosition == PropDetector.PropLocation.CENTER) {
                 purplePixelAngle = 0;
                 swipeHeading = Math.PI / 2;
+                endpoint = -31.4;
             } else if (propPosition == PropDetector.PropLocation.RIGHT) {
                 purplePixelAngle = 0;
-                swipeHeading = 0.7;
+                swipeHeading = 0.9;
+                endpoint = -22.0;
             }else if(propPosition == PropDetector.PropLocation.LEFT){
                 purplePixelAngle = Math.PI;
                 swipeHeading = Math.PI - 0.5;
+                endpoint = -35.4;
             }
         } else {
             purplePixelAngle = 0;
             swipeHeading = Math.PI / 2;
         }
+
+        double[][] points3 = new double[][]{{38.8, -4.2}, {-22.4, -9.7}, {-45.7, 7.8}, {-45, endpoint}};
+        Spline spline3 = new Spline(points3, 20, drivetrain, 200);
+        spline3.update();
 
         while (spline1.desiredT() < 0.98) {
             spline1.update();
@@ -89,11 +95,8 @@ public class BlueAuto extends LinearOpMode implements DrivetrainConstants, ArmCo
 
             double jamesSplineError = Math.hypot(robotPose[0] - points2[3][0], robotPose[1] - points2[3][1]);
 
-            arm.setTargetArmPosition(600);
+            arm.setTargetArmPosition(580);
             arm.armToPosition();
-
-            arm.setTargetWristPosition(4200);
-            arm.wristToPosition();
 
             telemetry.addData("wrist", arm.getWristPosition());
             telemetry.update();
@@ -104,7 +107,7 @@ public class BlueAuto extends LinearOpMode implements DrivetrainConstants, ArmCo
             double desiredT = spline2.desiredT();
 
             drivetrain.drive(new Vector(Math.cos(spline1.angle()), Math.sin(spline1.angle())), turn, autoAlign, true);
-            if (sampleTime.time() > 20) {
+            if (sampleTime.time() > 10) {
                 spline1.update();
                 sampleTime.reset();
             }
@@ -117,13 +120,26 @@ public class BlueAuto extends LinearOpMode implements DrivetrainConstants, ArmCo
             drivetrain.drive(new Vector(0, 0), 0, true, false);
             drivetrain.setTargetHeading(purplePixelAngle);
 
-            arm.setTargetWristPosition(4200);
+            arm.setTargetWristPosition(4400);
             arm.wristToPosition();
 
         }
 
         waitTime.reset();
-        while(waitTime.time() < 2){
+        while(waitTime.time() < 1){
+
+            arm.setTargetArmPosition(-500);
+            arm.armToPosition();
+
+            arm.setTargetWristPosition(4200);
+            arm.wristToPosition();
+
+            drivetrain.update();
+            drivetrain.drive(new Vector(0, 0), 0, true, false);
+        }
+
+        waitTime.reset();
+        while(waitTime.time() < 1){
             drivetrain.setTargetHeading(swipeHeading);
 
             arm.setTargetArmPosition(-500);
@@ -135,6 +151,7 @@ public class BlueAuto extends LinearOpMode implements DrivetrainConstants, ArmCo
             drivetrain.update();
             drivetrain.drive(new Vector(0, 0), 0, true, false);
         }
+
 
         hand.toggleRight();
 
@@ -162,9 +179,6 @@ public class BlueAuto extends LinearOpMode implements DrivetrainConstants, ArmCo
             boolean autoAlign = true;
 
 
-            telemetry.addData("wrist", arm.getWristPosition());
-            telemetry.update();
-
             drivetrain.drive(new Vector(Math.cos(spline2.angle()), Math.sin(spline2.angle())), turn, autoAlign, true);
             if (sampleTime.time() > 20) {
                 spline2.update();
@@ -172,6 +186,7 @@ public class BlueAuto extends LinearOpMode implements DrivetrainConstants, ArmCo
             }
         }
 
+        hand.toggleRight();
 
         while (spline3.desiredT() < 0.98) {
             spline3.update();
@@ -195,16 +210,42 @@ public class BlueAuto extends LinearOpMode implements DrivetrainConstants, ArmCo
         }
 
         waitTime.reset();
-        while(waitTime.time() < 0.5) {
-            drivetrain.setTargetHeading(Math.PI / 2);
-            drivetrain.drive(new Vector(0, 0), 0, true, true);
+        while(waitTime.time() < 2){
+            arm.setTargetArmPosition(500);
+            arm.armToPosition();
+            arm.virtualFourbar();
             drivetrain.update();
+            drivetrain.drive(new Vector(0, 0), 0, true, false);
+
         }
 
         waitTime.reset();
-        while (waitTime.time() < 1) {
+        while(waitTime.time() < 0.5){
             drivetrain.update();
-            drivetrain.drive(new Vector(0, 0), 0, true, true);
+            drivetrain.drive(new Vector(-0.3, 0), 0, true, true);
+        }
+
+        hand.toggleLeft();
+
+        waitTime.reset();
+        while(waitTime.time() < 0.8){
+            drivetrain.update();
+            drivetrain.drive(new Vector(0.3, 0), 0, true, true);
+        }
+
+        waitTime.reset();
+        while(waitTime.time() < 1){
+
+            drivetrain.setTargetHeading(Math.PI / 2);
+
+            if(waitTime.time() > 0.3) {
+                arm.setTargetArmPosition(0);
+                arm.armToPosition();
+            }
+            arm.virtualFourbar();
+            drivetrain.update();
+            drivetrain.drive(new Vector(0, 0), 0, true, false);
+
         }
 
         terminateOpModeNow();
