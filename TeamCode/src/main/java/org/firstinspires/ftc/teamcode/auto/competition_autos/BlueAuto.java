@@ -42,7 +42,7 @@ public class BlueAuto extends LinearOpMode implements DrivetrainConstants, ArmCo
         double[][] points2 = new double[][]{{36.0, -38.0}, {47.4, -69.6}, {76.8, -22.1}, {38.8, -4.2}};
 
         Spline spline1 = new Spline (points1, 20, drivetrain, 100);
-        Spline spline2 = new Spline(points2, 10, drivetrain, 100);
+        Spline spline2 = new Spline(points2, 10, drivetrain, 250);
         spline1.update();
         spline2.update();
 
@@ -70,7 +70,7 @@ public class BlueAuto extends LinearOpMode implements DrivetrainConstants, ArmCo
             if (propPosition == PropDetector.PropLocation.CENTER) {
                 purplePixelAngle = 0;
                 swipeHeading = Math.PI / 2;
-                endpoint = -31.4;
+                endpoint = -29.4;
             } else if (propPosition == PropDetector.PropLocation.RIGHT) {
                 purplePixelAngle = 0;
                 swipeHeading = 0.9;
@@ -95,7 +95,7 @@ public class BlueAuto extends LinearOpMode implements DrivetrainConstants, ArmCo
 
             double jamesSplineError = Math.hypot(robotPose[0] - points2[3][0], robotPose[1] - points2[3][1]);
 
-            arm.setTargetArmPosition(580);
+            arm.setTargetArmPosition(600);
             arm.armToPosition();
 
             telemetry.addData("wrist", arm.getWristPosition());
@@ -198,7 +198,7 @@ public class BlueAuto extends LinearOpMode implements DrivetrainConstants, ArmCo
             arm.setTargetArmPosition(0);
             arm.armToPosition();
 
-            drivetrain.setTargetHeading(desiredT < 0.9 ? 0 : Math.PI);
+            drivetrain.setTargetHeading(desiredT < 0.9 ? 0.1 : Math.PI);
             double turn = 0;
             boolean autoAlign = true;
 
