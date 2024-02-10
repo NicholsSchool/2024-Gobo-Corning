@@ -40,7 +40,7 @@ public class BlueAuto extends LinearOpMode implements DrivetrainConstants, ArmCo
 
         double[][] points1 = new double[][]{{35.8, -62.8}, {35.8, -62.8}, {35.4, -33.6}, {35.4, -33.6}};
         double[][] points2 = new double[][]{{36.0, -38.0}, {47.4, -69.6}, {76.8, -22.1}, {38.8, -4.2}};
-        double[][] points4 = new double[][]{{-47.0, -37.1}, {-47.8, -29.5}, {-39.6, -8.4}, {-64.4, -11.8}};
+        double[][] points4 = new double[][]{{-47.0, -37.1}, {-47.8, -29.5}, {-39.6, -8.4}, {-64.4, -10.8}};
         Spline spline1 = new Spline (points1, 20, drivetrain, 100);
         Spline spline2 = new Spline(points2, 10, drivetrain, 250);
         Spline spline4 = new Spline(points4, 10, drivetrain, 250);
