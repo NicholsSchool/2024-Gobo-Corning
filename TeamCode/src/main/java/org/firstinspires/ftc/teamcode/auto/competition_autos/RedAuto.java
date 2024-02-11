@@ -218,7 +218,7 @@ public class RedAuto extends LinearOpMode implements DrivetrainConstants, ArmCon
 
         waitTime.reset();
         while(waitTime.time() < 2){
-            arm.setTargetArmPosition(500);
+            arm.setTargetArmPosition(1000);
             arm.armToPosition();
             arm.virtualFourbar();
             drivetrain.update();

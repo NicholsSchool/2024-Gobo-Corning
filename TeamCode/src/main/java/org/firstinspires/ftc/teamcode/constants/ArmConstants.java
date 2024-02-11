@@ -41,7 +41,7 @@ public interface ArmConstants {
     double GROUND_POSITION = 0.0;
 
     /** Arm target position for drone launch (actual position is 920) */
-    double DRONE_POSITION = 1100.0;
+    double DRONE_POSITION = 1400.0;
 
     /** Arm target position for scoring pixels (actual position is 920) */
     double SCORING_POSITION = 1100.0;

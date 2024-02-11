@@ -213,7 +213,7 @@ public class BlueAuto extends LinearOpMode implements DrivetrainConstants, ArmCo
 
         waitTime.reset();
         while(waitTime.time() < 2){
-            arm.setTargetArmPosition(500);
+            arm.setTargetArmPosition(1000);
             arm.armToPosition();
             arm.virtualFourbar();
             drivetrain.update();

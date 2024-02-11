@@ -1,16 +1,17 @@
         NOTES:
 Find offsets of the arm, store in ArmConstants. Put in as Arm parameter
-Close TensorFlowVision before initializing April Tag Vision.
-
 
         CODE CHANGES:
 
     //FOR THIS COMPETITION
-Add more arm height selections                                  [TODO]
+find right plane launching height                               [TODO]
 Remove field oriented d-pad for operator                        [TODO]
-Add autos                                                       [TODO]
+add nudge                                                       [TODO]
+Add autos and one for judging room                              [TODO]
 
     //FOR NEXT COMPETITION
+Add more arm height selections                                  [TODO]
+
 Fix odometry, completely non-functional                         [TODO]
 
 Add Potentiometer Switch for choosing l/r column in auto        [TODO]

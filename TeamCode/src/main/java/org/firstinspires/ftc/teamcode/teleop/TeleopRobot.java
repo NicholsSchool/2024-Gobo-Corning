@@ -52,10 +52,7 @@ public class TeleopRobot implements ArmConstants, DrivetrainConstants {
         driverOI = new Controller(g1);
         operatorOI = new Controller(g2);
 
-        if(isBlue)
-            armSetPositions = new double[]{GROUND_POSITION, SCORING_POSITION, DRONE_POSITION, CLIMB_POSITION};
-        else
-            armSetPositions = new double[]{GROUND_POSITION, DRONE_POSITION, SCORING_POSITION, CLIMB_POSITION};
+        armSetPositions = new double[]{GROUND_POSITION, SCORING_POSITION, DRONE_POSITION, CLIMB_POSITION};
 
         autoAlignPositions = isBlue ?
                 new double[]{Angles.PI_OVER_TWO, Angles.NEGATIVE_PI_OVER_TWO, 0.0, -Math.PI} :
@@ -129,7 +126,18 @@ public class TeleopRobot implements ArmConstants, DrivetrainConstants {
     }
 
     private void drivetrainControls() {
-        Vector driveVector = driverOI.leftStick.toVector();
+        Vector driveVector;
+        if(driverOI.dpadDown.isPressed())
+            driveVector = new Vector(0.0, -VIRTUAL_LOW_GEAR);
+        else if(driverOI.dpadLeft.isPressed())
+            driveVector = new Vector(-VIRTUAL_LOW_GEAR, 0.0);
+        else if(driverOI.dpadRight.isPressed())
+            driveVector = new Vector(VIRTUAL_LOW_GEAR, 0.0);
+        else if(driverOI.dpadUp.isPressed())
+            driveVector = new Vector(0.0, VIRTUAL_LOW_GEAR);
+        else
+            driveVector = driverOI.leftStick.toVector();
+
         double turn = driverOI.rightStick.x.value();
 
         boolean lowGear = driverOI.leftTrigger.value() <= 0.5;
