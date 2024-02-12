@@ -11,8 +11,8 @@ public interface HandConstants {
     double LEFT_OUT = 0.45;
 
     /** Right Grabber In Position */
-    double RIGHT_IN = 0.19;
+    double RIGHT_IN = 0.17;
 
     /** Left Grabber Out Position */
-    double RIGHT_OUT = 0.4;
+    double RIGHT_OUT = 0.38;
 }

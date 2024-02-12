@@ -174,14 +174,14 @@ public class RedAuto extends LinearOpMode implements DrivetrainConstants, ArmCon
             arm.wristToPosition();
 
             if(spline2.desiredT() > 0.2) {
-                arm.setTargetArmPosition(500);
+                arm.setTargetArmPosition(0);
                 arm.armToPosition();
             }
 
             double jamesSplineError = Math.hypot(robotPose[0] - points2[3][0], robotPose[1] - points2[3][1]);
             double desiredT = spline2.desiredT();
 
-            drivetrain.setTargetHeading(Math.PI);
+            drivetrain.setTargetHeading(spline2.desiredT() < 0.7 ? -Math.PI / 2 : 0);
             double turn = 0;
             boolean autoAlign = true;
 
@@ -218,7 +218,7 @@ public class RedAuto extends LinearOpMode implements DrivetrainConstants, ArmCon
 
         waitTime.reset();
         while(waitTime.time() < 2){
-            arm.setTargetArmPosition(1000);
+            arm.setTargetArmPosition(625);
             arm.armToPosition();
             arm.virtualFourbar();
             drivetrain.update();
@@ -235,13 +235,13 @@ public class RedAuto extends LinearOpMode implements DrivetrainConstants, ArmCon
         hand.toggleLeft();
 
         waitTime.reset();
-        while(waitTime.time() < 0.8){
+        while(waitTime.time() < 0.6){
             drivetrain.update();
             drivetrain.drive(new Vector(0.3, 0), 0, true, true);
         }
 
         waitTime.reset();
-        while(waitTime.time() < 1){
+        while(waitTime.time() < 3){
 
             drivetrain.setTargetHeading(-Math.PI / 2);
 
@@ -249,47 +249,13 @@ public class RedAuto extends LinearOpMode implements DrivetrainConstants, ArmCon
                 arm.setTargetArmPosition(0);
                 arm.armToPosition();
             }
-            arm.virtualFourbar();
+            arm.setTargetWristPosition(-50.0);
+            arm.wristToPosition();
             drivetrain.update();
             drivetrain.drive(new Vector(0, 0), 0, true, false);
 
         }
-
-        while (spline4.desiredT() < 0.96) {
-            spline4.update();
-            double[] robotPose = new double[]{drivetrain.getRobotPose().x, drivetrain.getRobotPose().y};
-
-            double jamesSplineError = Math.hypot(robotPose[0] - points2[3][0], robotPose[1] - points2[3][1]);
-
-            arm.setTargetArmPosition(0);
-            arm.armToPosition();
-
-            arm.virtualFourbar();
-
-            telemetry.addData("wrist", arm.getWristPosition());
-            telemetry.update();
-
-            double turn = 0;
-            boolean autoAlign = true;
-
-            double desiredT = spline4.desiredT();
-
-            drivetrain.drive(new Vector(Math.cos(spline4.angle()), Math.sin(spline4.angle())), turn, autoAlign, true);
-            if (sampleTime.time() > 10) {
-                spline4.update();
-                sampleTime.reset();
-            }
-
-        }
-        waitTime.reset();
-        while(waitTime.time() < 1){
-            arm.setTargetArmPosition(0);
-            arm.setTargetWristPosition(0);
-            drivetrain.setTargetHeading(-Math.PI / 2);
-            arm.armToPosition();
-            arm.wristToPosition();
-            drivetrain.drive(new Vector(0, 0), 0, true, false);
-        }
+        drivetrain.drive(new Vector(0, 0), 0, false, false);
 
         terminateOpModeNow();
     }
